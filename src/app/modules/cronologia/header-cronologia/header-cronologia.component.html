@@ -1,0 +1,130 @@
+<section class="container">
+    <div class="card card-header-top-radius">
+        <div style="display: flex; flex-direction: row;">
+            <div style="flex: 1; display: flex; flex-direction: row;">
+                <div class="backButton" *ngIf="idMenu == idMenuConstant.notaMedica && indBusquedaNSS">
+                    <img src="assets/images/icon_regresar.svg" class="img-container-regresar" (click)="navigate()">
+                </div>
+                <div class="backButton" *ngIf="idMenu != idMenuConstant.notaMedica">
+                    <img src="assets/images/icon_regresar.svg" class="img-container-regresar" (click)="navigate()">
+                </div>
+                <div style="margin-left: 30px">
+                    <h5 class="golden">PACIENTE</h5>
+                    <h4>{{datosPaciente?.nombre | lowercase | titlecase }}</h4>
+                </div>
+            </div>
+            <div class="rightSectionContainer">
+                <div class="rightSectionLeft"></div>
+                <div class="rightSectionRight"></div>
+                <div class="rightSectionTextContainer">
+                    <ng-container [ngSwitch]="idMenu">
+                        <h4 *ngSwitchCase="idMenuConstant.notaMedica" class="rightSectionLabel">{{getMenuLabel.notaMedica}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.notaMedicaDetalle" class="rightSectionLabel">{{getMenuLabel.notaMedicaDetalle}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.receta" class="rightSectionLabel">{{getMenuLabel.receta}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.laboratorio" class="rightSectionLabel">{{getMenuLabel.laboratorio}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.recetaDetalle" class="rightSectionLabel">{{getMenuLabel.recetaDetalle}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.referencia" class="rightSectionLabel">{{getMenuLabel.referencia}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.contrareferencia" class="rightSectionLabel">{{getMenuLabel.contrareferencia}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.incapacidades" class="rightSectionLabel">{{getMenuLabel.incapacidades}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.incapacidadesDetalle" class="rightSectionLabel">{{getMenuLabel.incapacidadesDetalle}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.carnetAPOInterno" class="rightSectionLabel">{{getMenuLabel.carnetAPOInterno}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.incapacidadesDetail" class="rightSectionLabel">{{getMenuLabel.incapacidadDetail}}</h4>
+                        <h4 *ngSwitchCase="idMenuConstant.notaMedicaDetalleHospitalizacion" class="rightSectionLabel">{{getMenuLabel.hospitalizacion}}
+
+                            <span [ngSwitch]="idSubMenuNota">
+                                <span *ngSwitchCase="idSubMenuConstant.notaInicialHospitalizacion">
+                                   - {{getSubMenuLabel.notaInicialHospitalizacion}}
+                                </span>
+                                <span *ngSwitchCase="idSubMenuConstant.notaEvolucionHospitalizacion">
+                                    - {{getSubMenuLabel.notaEvolucionHospitalizacion}}
+                                 </span>
+                                 <span *ngSwitchCase="idSubMenuConstant.notaEgresoHospitalizacion">
+                                    - {{getSubMenuLabel.notaEgresoHospitalizacion}}
+                                 </span>
+                            </span>
+                            
+                        </h4>
+                        
+                        <!-- <h4 *ngSwitchCase="idMenuConstant.notaInicialHospitalizacion" class="rightSectionLabel">{{getMenuLabel.notaInicialHospitalizacion}}</h4> -->
+
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body row-margin">
+            <div class="row d-flex align-items-center">
+                <div class="col col-img">
+                    <div class="img">
+                        <span>
+                            <img src="assets/images/icon_edad.png" class="img-container">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm col-margin-sep" style="max-width:8rem">
+                    <label>Edad</label><br><output>{{edadDetalle ? edadDetalle : datosPaciente?.edadActual}} años</output>
+                </div>
+                <div class="col" style="max-width:10rem">
+                    <label>Sexo</label>
+                    <output>{{datosPaciente?.sexo | lowercase | titlecase }}</output>
+                </div>
+                <div class="col col-img">
+                    <div class="img">
+                        <span>
+                            <img src="assets/images/icon_nss.png" class="img-container">
+                        </span>
+                    </div>
+                </div>
+                <div class="col col-margin-sep">
+                    <label>NSS</label>
+                    <output>{{datosPaciente?.nss}}</output>
+                </div>
+                <div class="col">
+                    <label>A. Médico</label>
+                    <output>{{datosPaciente?.agregadoMedico}}</output>
+                </div>
+                <div class="col col-img">
+                    <div class="img">
+                        <span>
+                            <img src="assets/images/icon_curp.png" class="img-container">
+                        </span>
+                    </div>
+                </div>
+                <div class="col">
+                    <label>CURP</label>
+                    <output>{{datosPaciente?.curp}}</output>
+                </div>
+                <div class="col dropdown">
+                    <div class="img-end">
+                        <span class="dropbtn">
+                            <img src="assets/images/icon_historico_v2.png" class="img-container" data-toggle="dropdown">
+                        </span>
+                        <div class="dropdown-content">
+                            <h4 class="ul-header">Cronología</h4>
+                            <ul>
+                                <li (click)="selectedMenu(idMenuConstant.notaMedica)">
+                                    <h5 class="control-label" style="font-weight: normal;">Nota médica</h5>
+                                </li>
+                                <li (click)="selectedMenu(idMenuConstant.receta)">
+                                    <h5 class="control-label" style="font-weight: normal;">Recetas</h5>
+                                </li>
+                                <li (click)="selectedMenu(idMenuConstant.laboratorio)">
+                                    <h5 class="control-label" style="font-weight: normal;">Laboratorio</h5>
+                                </li>
+                                <li (click)="selectedMenu(idMenuConstant.incapacidades)">
+                                    <h5 class="control-label" style="font-weight: normal;">Incapacidades</h5>
+                                </li>
+                                <li (click)="goFuji()">
+                                    <h5 class="control-label" style="font-weight: normal;">Imagenología</h5>
+                                </li>
+                                <li (click)="selectedMenu(idMenuConstant.carnetAPOInterno)" *ngIf="datosPaciente?.carnet">
+                                    <h5 class="control-label" style="font-weight: normal;">Carnet oncológico</h5>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

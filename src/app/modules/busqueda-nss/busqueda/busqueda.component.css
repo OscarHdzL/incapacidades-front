@@ -1,0 +1,174 @@
+.flex-end {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.field-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.img-container-header {
+  padding: 0%;
+  max-height: 5.1rem;
+  z-index:-5;
+  border-radius: 1rem;
+}
+
+.img-container {
+  padding: 0%;
+  max-height: 5rem;
+}
+
+.img-container-regresar {
+  padding: 0%;
+  max-height: 2rem;
+  cursor: pointer;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.card-body {
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+
+/* img{
+  border-radius: 1rem;
+} */
+
+.col-img {
+  max-width: 7rem;
+}
+
+.table-radius {
+  border-top-left-radius: .25rem; 
+  border-top-right-radius: .25rem; 
+  border-bottom-left-radius: .25rem; 
+  border-bottom-right-radius: .25rem; 
+  border: solid 1px #cccccc;
+}
+
+.img-end {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.img-start {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.row-margin {
+  border-top-style: solid;
+  border-top-color: rgba(0,0,0,.125);
+  border-top-width: 1px;
+}
+
+.col-margin-sep {
+  border-right: 1px solid rgba(0,0,0,.125);
+}
+
+/* Termina Dropdown */
+
+@media screen and (max-width: 1024px) {
+  .img-container-header {
+      padding: 0%;
+      max-height: 4rem;
+  }
+  
+  .col-img {
+      max-width: 5rem;
+  }
+
+  .img-container {
+      padding: 0%;
+      max-height: 2.7rem;
+  }
+
+  .h5, h5 {
+      font-size: .7rem;
+  }
+
+  .h4, h4 {
+      font-size: .6rem;
+  }
+
+  .p {
+      font-size: .6em;
+  }
+
+  .control-label{
+      font-size: .6em;
+  }
+
+  .form-control, output {
+      font-size: .6em;
+  }
+
+  .btn-font {
+    font-size: .6em;
+  }
+
+}
+
+/*   a:visited {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    text-decoration: underline;
+  } */
+
+  .rightSectionContainer {
+    flex: 4; display: flex; flex-direction: row; position: relative; height: 80px;
+}
+
+.rightSectionLeft {
+    width: 70%;
+    height: 100%;
+    transform: skew(60deg);
+    border-radius: 0 60px 20px 0;
+    background: #f6faff; z-index: 2;
+}
+
+.rightSectionRight {
+    border-top-right-radius: 1rem;
+    background-color: #E4EFFF;
+    position: absolute;
+    height: 100%;
+    width: 60%;
+    right: 0;
+    z-index: 1;
+}
+
+.rightSectionTextContainer {
+    position: absolute;
+    display: flex;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: right;
+}
+
+.rightSectionLabel{
+    margin-right: 20px;
+}
+
+.backButton {
+    display: flex; flex-direction: column; justify-content: center; margin-left: 30px;
+}

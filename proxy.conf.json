@@ -1,0 +1,50 @@
+{
+    "/hc-consultas-medicas": {
+        "target": "https://mshc-consultas-medicas-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/nidp": {
+        "target": "https://idpqa.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/hc-consultas-medicas-jwt-api": {
+        "target": "https://mshc-consultas-medicas-qa.cloudapps.imss.gob.mx/",
+        "secure": false,
+        "changeOrigin": true
+    },
+
+    "/mshc-notas": {
+        "target": "https://edshc-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+
+    "/mshc-auxiliares": {
+        "target": "https://edshc-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+
+    "/hc-consultas-medicas-api": {
+        "target": "https://edshc-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/mshc-autenticacion":{
+        "target": "https://edshc-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/mshc-imagenologia":{
+        "target": "https://edshc-qa.cloudapps.imss.gob.mx",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/mshc-incapacidades": {
+        "target": "http://localhost:8080",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

@@ -1,0 +1,57 @@
+.flex-end {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+.hiddenRow {
+  padding: 0 !important;
+}
+
+table.pruebaTable {
+	margin: auto;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.pruebaTable thead th {
+	padding: 2px;
+}
+
+table.pruebaTable th, table.pruebaTable td {
+	padding: 1px;
+  text-align: left;
+}
+
+table.pruebaTable td {
+	text-align: left;
+}
+
+table.pruebaTable tr {
+	border-bottom: 2px solid hsl(0, 0%, 87%);
+}
+
+table.pruebaTable tbody th {
+	text-align: left;
+	font-weight: normal;
+  font-size: 16px;
+}
+
+table.pruebaTable tr:nth-child(odd) {
+  background-color: #f4f8ff;
+}
+
+table.table-striped-blue tr:nth-child(odd) {
+  background-color: #f4f8ff;
+}
+
+@media screen and (max-width:1024px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 18.75px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+}

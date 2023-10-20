@@ -1,0 +1,193 @@
+<section class="container container-padding-top">
+    <div class="card card-header-top-radius card-header-bottom-radius">
+        <div class="card-body">
+            <div class="row d-flex align-items-center">
+                <div class="col-2 col-margin-sep-pipe" style="padding-left: 2rem;">
+                    <h5>{{ referencia?.unidad }}, {{ referencia?.ooad }}</h5>
+                </div>
+                <div class="col-3">
+                    <h5 class="capital">{{ dateHeaderParsed }}</h5>
+                </div>
+                <div class="col-7 tur-con">
+                    <div class="row d-flex align-items-center justify-content-start">
+                        <div class="col-3 col-margin-sep">
+                            <label>Turno</label>
+                            <output>{{referencia?.desTurno}}</output>
+                        </div>
+                        <div class="col-3">
+                            <label>Consultorio</label>
+                            <output>{{referencia?.consultorioAtencion}}</output>
+                        </div>
+                        <!--div class="col-2">
+                            <div class="img">
+                                <span>
+                                    <img src="assets/images/icon_referencia_header.png" class="img-container-header">
+                                </span>
+                            </div>
+                        </div-->
+                        <div class="col-3" [ngClass]=" (1 >= actualIndex) ? 'arrows-referencia-disabled' : 'arrows-referencia'" (click)="getDetalleReferencia(actualIndex - 1)">
+                            <div class="row d-flex align-items-center justify-content-start">
+                                <div class="col-2 img">
+                                    <span><img src="assets/images/arrow-left.svg"></span>
+                                </div>
+                                <div class="col-8">
+                                    Referencia <br />anterior
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3" [ngClass]="(actualIndex) === referencias.totalElements ? 'arrows-referencia-disabled' : 'arrows-referencia'" (click)="getDetalleReferencia(actualIndex + 1)">
+                            <div class="row d-flex align-items-center justify-content-end" style="padding-right: 1rem;">
+                                <div class="col">
+                                    Referencia <br />siguiente
+                                </div>
+                                <div class="col img">
+                                    <span><img src="assets/images/arrow-right.svg"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col referencia-header-bg">
+                <div class="row d-flex align-items-center justify-content-center" style="padding-top: .5rem;">
+                    <div class="col-3 margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_tipo_consulta.svg"
+                                            class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Tipo de referencia</label>
+                                <output>{{referencia?.tipoConsulta}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_ocasion.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Ocasión</label>
+                                <output>{{referencia?.ocasion}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_motivo_envio.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Motivo de envío</label>
+                                <output>{{referencia?.motivoEnvio}}</output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="padding-top: 1rem;">
+                    <div class="col-11">
+                        <div class="rounded-radiants hdr-tr">
+                            <div class="row justify-content-center align-items-center" style="padding: 1rem;">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_delegacion_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>OOAD a la que se envía</label>
+                                            <output>{{referencia?.delegacionEnvia}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_unidad_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Unidad a la que se envía</label>
+                                            <output>{{referencia?.unidadEnvia}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_especialidad_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Especialidad a la que se envía</label>
+                                            <output>{{referencia?.especialidadEnvia}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_diagnostico.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Diagnóstico</label>
+                                            <output>{{referencia?.diagnostico}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-11 border-bottom-referencia-header"></div>
+                        </div>
+                        <div class="col-12" style="padding: 1rem;">
+                            <label class="control-label row-spacer">Información adicional</label>
+                            <output class="sroll-resumen-clinico">{{ referencia?.informacionAdicional }}</output>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-end align-items-center" *ngIf="referencias" style="padding-right: 1rem;">
+                    <div class="col-2" *ngIf="referencias && referencias.content">
+                        <p-paginator [rows]="pageRequest.pageSize" [totalRecords]="referencias?.totalElements"
+                            (onPageChange)="getPagerReferencias($event)" [pageLinkSize]="3" [(first)]="paginatorFirstIndex"
+                            [showFirstLastIcon]="false">
+                        </p-paginator>
+                    </div>
+                    <div class="col-1" *ngIf="referencias && referencias.content" style="font-size: 14px;">
+                        Resultados
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

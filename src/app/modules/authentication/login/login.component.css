@@ -1,0 +1,43 @@
+
+.login-image {
+    background-image: url(src/assets/images/login.png);
+    /* padding: 0px; */
+}
+
+.img-container, .form-container{
+    width: 50%;
+}
+
+.container-fluid{
+  display: flex;
+  /* padding-left: 0; */
+  padding: 0%;
+  background: white;
+}
+
+.titulo-inicio {
+  margin-top: 5rem;
+}
+
+.show-hide-eye {
+  cursor: pointer;
+  opacity: 0.5;
+  border: none;
+}
+
+.show-hide-eye:hover {
+  opacity: 1;
+}
+
+.show-hide-eye:active {
+  transform: scale(0.9);
+}
+
+@media screen and (max-width: 768px) {
+    .img-container {
+      display: none;
+    }
+    .form-container {
+      min-width: 100%;
+    }
+}

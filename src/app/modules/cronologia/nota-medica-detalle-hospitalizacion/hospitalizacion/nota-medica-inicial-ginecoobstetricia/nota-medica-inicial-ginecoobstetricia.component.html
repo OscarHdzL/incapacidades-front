@@ -1,0 +1,1453 @@
+<section class="container container-padding-top">
+  <div class="card" style="width: 100%; border-radius: 1rem">
+    <div
+      class="row d-flex align-items-center"
+      style="padding-left: 1rem; padding-right: 1rem"
+    >
+      <div class="col-3">
+        <h5>
+          {{ detalleNotaMedica?.notaMedicaParent?.unidad }},
+          {{ detalleNotaMedica?.notaMedicaParent?.ooad }}
+        </h5>
+      </div>
+      <div class="col-5">
+        <h5 class="capital">{{ dateHeaderParsed }}</h5>
+      </div>
+      <div class="col-4 img-end-flechas">
+        <div class="row">
+          <div class="col-sm-6 svg-arrows">
+            <img
+              [ngStyle]="{ opacity: validIndex(actualNotaIndex - 1) ? 1 : 0.4 }"
+              src="assets/images/icon_nota_anterior.svg"
+              (click)="getDetalleNotaMedica(actualNotaIndex - 1)"
+            />
+          </div>
+          <div class="col-sm-6 svg-arrows">
+            <img
+              [ngStyle]="{ opacity: validIndex(actualNotaIndex + 1) ? 1 : 0.4 }"
+              src="assets/images/icon_nota_siguiente.svg"
+              (click)="getDetalleNotaMedica(actualNotaIndex + 1)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body row-margin">
+      <div class="row d-flex align-items-center">
+        <!-- <div class="row"> -->
+        <div class="col-2 col-img">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/somatometria_header.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+        <!-- </div> -->
+        <div class="col-10">
+          <div class="row">
+            <label
+              class="label-somatometria"
+              style="font-weight: bold; color: #404041"
+              >Somatometría</label
+            >
+          </div>
+          <div class="row">
+            <div class="col col-margin-sep" style="max-width: 6rem">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.estatura }} m</output
+              >
+              <label class="label-somatometria">Estatura</label>
+            </div>
+            <div class="col col-margin-sep" style="max-width: 6rem">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.peso }} Kg</output
+              >
+              <label class="label-somatometria">Peso</label>
+            </div>
+            <div class="col col-margin-sep" style="max-width: 8rem">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.temperatura }} °C</output
+              >
+              <label class="label-somatometria">Temperatura</label>
+            </div>
+            <div class="col col-margin-sep">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.presionArterialsis }}mmHg /
+                {{
+                  detalleNotaMedica?.somatometria?.presionArterialdia
+                }}mmHg</output
+              >
+              <label class="label-somatometria">Presión arterial</label>
+            </div>
+            <div class="col col-margin-sep">
+              <output class="control-label"
+                >{{
+                  detalleNotaMedica?.somatometria?.frecuenciaCardiaca
+                }}
+                latidos/min</output
+              >
+              <label class="label-somatometria">Frecuencia cardiaca</label>
+            </div>
+            <div class="col col-margin-sep">
+              <output class="control-label"
+                >{{
+                  detalleNotaMedica?.somatometria?.frecuenciaRespiratoria
+                }}
+                resp./min</output
+              >
+              <label class="label-somatometria">Frecuencia respiratoria</label>
+            </div>
+            <div class="col col-margin-sep" style="max-width: 8rem">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.glucosa }} mg/dl</output
+              >
+              <label class="label-somatometria">Glucosa</label>
+            </div>
+            <div class="col">
+              <output class="control-label"
+                >{{ detalleNotaMedica?.somatometria?.saturacion }} %</output
+              >
+              <label class="label-somatometria">Saturación de Oxígeno</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 row-margin-div"></div>
+      <div class="row d-flex align-items-center">
+        <!-- <div class="row"> -->
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/AntecedentesPersonalesPatologicos.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="antPat"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado == TabAntecedentes.AntecendentesPatologicos
+              ? 'tabSeleccionadoPatologico'
+              : ''
+          "
+          (click)="changeTabSelected(TabAntecedentes.AntecendentesPatologicos)"
+        >
+          <div class="img">
+            <label>Antecedentes personales patológicos</label>
+          </div>
+        </div>
+
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/AntecedentesGinecoObstetricos.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="antGin"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado ==
+            TabAntecedentes.AntecendentesGinecoObstetricos
+              ? 'tabSeleccionadoGineco'
+              : ''
+          "
+          (click)="
+            changeTabSelected(TabAntecedentes.AntecendentesGinecoObstetricos)
+          "
+        >
+          <div class="img">
+            <label>Antecedentes gineco obstétricos</label>
+          </div>
+        </div>
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/OtrosAntecedentesPersonalesPatologicos.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+        <div
+          id="oAntPat"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado ==
+            TabAntecedentes.OtrosAntecendentesPatologicos
+              ? 'tabSeleccionadoPatologico'
+              : ''
+          "
+          (click)="
+            changeTabSelected(TabAntecedentes.OtrosAntecendentesPatologicos)
+          "
+        >
+          <div class="img">
+            <label>Otros antecedentes personales patológicos</label>
+          </div>
+        </div>
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/OtrosAntecedentesGinecoObstetricos.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="oAntGin"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado ==
+            TabAntecedentes.OtrosAntecendentesGinecoObstetricos
+              ? 'tabSeleccionadoGineco'
+              : ''
+          "
+          (click)="
+            changeTabSelected(
+              TabAntecedentes.OtrosAntecendentesGinecoObstetricos
+            )
+          "
+        >
+          <div class="img">
+            <label>Otros antecedentes gineco obstétricos</label>
+          </div>
+        </div>
+
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/PadecimientoActual.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="padActual"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado == TabAntecedentes.PadecimientoActual
+              ? 'tabSeleccionadoPadecimientoActual'
+              : ''
+          "
+          (click)="changeTabSelected(TabAntecedentes.PadecimientoActual)"
+        >
+          <div class="img">
+            <label>Padecimiento actual</label>
+          </div>
+          <br />
+        </div>
+
+        <div class="col-2 col-img-antecedentes">
+          <div class="img">
+            <span>
+              <img
+                src="assets/images/IconosNotas/DatosObstetricos.png"
+                class="img-container"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="datObst"
+          class="col-2 col-img-antecedentes"
+          [ngClass]="
+            this.tabSeleccionado == TabAntecedentes.DatosObstetricos
+              ? 'tabSeleccionadoObstetricos'
+              : ''
+          "
+          (click)="changeTabSelected(TabAntecedentes.DatosObstetricos)"
+        >
+          <div class="img">
+            <label>Datos obstétricos</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 row-margin-div"></div>
+      <!-- <div
+      *ngIf=""
+        class="row"
+        [class.row-margin-antecedentes-patologicos]="
+          this.tabSeleccionado == TabAntecedentes.AntecendentesPatologicos ||
+          this.tabSeleccionado == TabAntecedentes.OtrosAntecendentesPatologicos
+        "
+        [class.row-margin-antecedentes-gineco]="
+          this.tabSeleccionado ==
+            TabAntecedentes.AntecendentesGinecoObstetricos ||
+          this.tabSeleccionado ==
+            TabAntecedentes.OtrosAntecendentesGinecoObstetricos
+        "
+        [class.row-margin-antecedentes-padecimiento-actual]="
+          this.tabSeleccionado == TabAntecedentes.PadecimientoActual
+        "
+        [class.row-margin-antecedentes-datos-obstetricos]="
+          this.tabSeleccionado == TabAntecedentes.DatosObstetricos
+        "
+      >
+      </div> -->
+      <!-- ANTECEDDENTES PERSONALES PATOLOGICOS -->
+      <div
+      *ngIf="this.tabSeleccionado == TabAntecedentes.AntecendentesPatologicos"
+        class="row row-margin-antecedentes-patologicos"
+      >
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Cardiopatia</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Cardiopatia</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Enfermedades inmunologicas</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Cardiopatia</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Cardiopatia</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Cardiopatia</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANTECEDENTES PERSONALES GINECO OBSTETRICOS -->
+      <div
+      *ngIf="this.tabSeleccionado == TabAntecedentes.AntecendentesGinecoObstetricos"
+        class="row row-margin-antecedentes-gineco"
+      >
+        <div class="col-3">
+          <div class="row margin-antecedente">
+            <div class="col-3 container-antedente">
+              <span>
+                <img
+                  src="assets/images/IconosNotas/icono_calendar.png"
+                  class="img-container-antecedente"
+                />
+              </span>
+            </div>
+            <div class="col-9">
+              <label>Eclamsia embarazo</label><br />
+              <label class="labelFechaAntecedente">22/03/2021</label><br />
+              <output class="labelTituloFechaAntecedente"
+                >Fecha de última detección</output
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+            <div class="row margin-antecedente">
+              <div class="col-3 container-antedente">
+                <span>
+                  <img
+                    src="assets/images/IconosNotas/icono_calendar.png"
+                    class="img-container-antecedente"
+                  />
+                </span>
+              </div>
+              <div class="col-9">
+                <label>Embarazo ectópico</label><br />
+                <label class="labelFechaAntecedente">22/03/2021</label><br />
+                <output class="labelTituloFechaAntecedente"
+                  >Fecha de última detección</output
+                >
+              </div>
+            </div>
+          </div>
+       
+      </div>
+
+    <!-- OTROS ANTECEDENTES PATOLOGICOS -->
+    <div
+    *ngIf="this.tabSeleccionado == TabAntecedentes.OtrosAntecendentesPatologicos"
+      class="row row-margin-antecedentes-patologicos"
+    >
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Transfusiones</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Transfusiones</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Transfusiones</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Transfusiones</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Transfusiones</output
+            >
+          </div>
+        </div>
+      </div>
+      
+     
+    </div>
+
+
+    <!-- OTROS ANTEDENTES GINECO OBSTETRICOS -->
+    <div
+    *ngIf="this.tabSeleccionado == TabAntecedentes.OtrosAntecendentesGinecoObstetricos"
+      class="row row-margin-antecedentes-gineco"
+    >
+      <div class="col">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>0</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Gesta</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>0</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Para</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Aborto</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Cesarea</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_otro_antecedente.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Amenorrea</output
+            >
+          </div>
+        </div>
+      </div>
+           
+    </div>
+
+
+    <!-- PADECIMIENTO ACTUAL -->
+    <div
+    *ngIf="this.tabSeleccionado == TabAntecedentes.PadecimientoActual"
+      class="row row-margin-antecedentes-gineco"
+    >
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_fum.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>23/03/2021</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >F.U.M</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_cesarea.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Cesarea</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_acufenos.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Acúfenos</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_fosfenos.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Fosfenos</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_epigastralgia.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>No</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Epigastralgia</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_edema.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Edema</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_hiperreflexia.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>No</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Hiperreflexia</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_alteracion_pulmonar.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Si</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Alteraciones cardiopulmonares</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_alteracion_pulmonar_2.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Lorem ipsum </label><br />
+            <output class="labelTituloFechaAntecedente"
+              >¿Cuáles?</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_dolor_obstetrico.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>Lorem ipsum </label><br />
+            <output class="labelTituloFechaAntecedente"
+              >¿Otro dolor no obstetrico?</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_dolor_obstetrico_especifique.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>-- </label><br />
+            <output class="labelTituloFechaAntecedente"
+              >Especifique</output
+            >
+          </div>
+        </div>
+      </div>
+ 
+
+      
+           
+    </div>
+
+     <!-- DATOS OBSTETRICOS -->
+     <div
+     *ngIf="this.tabSeleccionado == TabAntecedentes.DatosObstetricos"
+     class="row row-margin-antecedentes-datos-obstetricos"
+     >
+<div class="row border-abajo">
+    <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_alerta_mater.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>No</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >¿Activar alerta MATER?</output
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="row margin-antecedente">
+          <div class="col-3 container-antedente">
+            <span>
+              <img
+                src="assets/images/IconosNotas/icono_embarazo_ectopico.png"
+                class="img-container-antecedente"
+              />
+            </span>
+          </div>
+          <div class="col-9">
+            <label>No</label><br />
+            <output class="labelTituloFechaAntecedente"
+              >¿Embarazo Ectopico?</output
+            >
+          </div>
+        </div>
+      </div>
+</div>
+<div class="row border-abajo" >
+    <div class="col-1 container-etiqueta-izq">
+        <label >Abdomen</label>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_fondo_uterino.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Fondo uterino</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_contracciones.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>3 de cada 10 minutos</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Contracciones</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_tono_uterino.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Tono uterino</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_frecuencia_fetal.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Frecuencia cardiaca fetal</output
+                    >
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="row" >
+    <div class="col-1 container-etiqueta-izq">
+        <label>Cuello uterino</label>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_dilatacion.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Dilatación</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_borramiento.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>3 de cada 10 minutos</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Borramiento</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_longitud.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Longitud</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_altura_hodge.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Altura hodge</output
+                    >
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="row" >
+    <div class="col-1 ">
+        <label></label>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_consistencia.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Consistencia</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_posicion.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>3 de cada 10 minutos</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Posición</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_situacion.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Situación</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_presentacion.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Presentación</output
+                    >
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="row " >
+    <div class="col-1 ">
+        <label></label>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_dorso.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Dorso</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_actividad_uterina.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>3 de cada 10 minutos</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Actividad uterina</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_pss.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >PSS</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_cristalografia.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Cristalografía</output
+                    >
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="row" >
+    <div class="col-1 ">
+        <label></label>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_tipo_hemorragia.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>XXX</label><br />
+                    <label class="labelDatoObstetrico">Tipo de hemorragia</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                    
+                      >Hemorragia</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_fecha_membranas.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>3 de cada 10 minutos</label><br />
+                    <label class="labelDatoObstetrico">Membranas</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Fecha(Rotas)</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_hora_membranas.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    <label class="labelDatoObstetrico">Membranas</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Hora(Rotas)</output
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row margin-antecedente">
+                  <div class="col-3 container-antedente">
+                    <span>
+                      <img
+                        src="assets/images/IconosNotas/icono_liquido_amniotico.png"
+                        class="img-container-antecedente"
+                      />
+                    </span>
+                  </div>
+                  <div class="col-9">
+                    <label>No</label><br />
+                    
+                    <label class="labelDatoObstetrico">Membranas</label><br />
+                    <output class="labelTituloFechaAntecedente"
+                      >Aspecto liquido amniótico(Rotas)</output
+                    >
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+       
+       
+            
+     </div>
+
+
+
+      <div class="col-12 row-margin-div"></div>
+
+      <div
+        class="row d-flex row-spacer body-tit"
+        style="padding-left: 1rem; padding-bottom: 1rem"
+      >
+        <div class="col-8 col-margin-sep">
+          <label class="row-spacer">Nota médica inicial</label>
+          <output class="sroll-resumen-clinico">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. </output>
+          
+          <br>
+          <label class="row-spacer">Reporte de ultrasonido</label>
+          <output class="sroll-resumen-clinico">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. </output>
+          <br>
+          <label class="row-spacer">Reporte de laboratorio</label>
+          <output class="sroll-resumen-clinico">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. </output>
+        </div>
+        <div class="col-4" style="padding-left: 2rem;">
+          <div class="row row-spacer" style="width: 98%">
+            <div class="col">
+              <label>¿Consistente?</label>
+              <br>
+              <output>Consistenteeeee</output>
+            </div>
+          </div>
+          <div class="row row-spacer" style="width: 98%">
+            <div class="col">
+              <label>¿Es paciente de obstetricia?</label>
+              <br>
+              <output>Tratamiento especializado</output>
+            </div>
+          </div>
+          <div class="row row-spacer" style="width: 98%">
+            <div class="col">
+              <label>Diagnostico</label>
+              <br>
+              <output>Alza termica y hematuria</output>
+            </div>
+          </div>
+
+          <div class="row row-spacer" style="width: 98%">
+            <div class="col">
+              <label>Pronostico</label>
+              <br>
+              <output>Alza termica y hematuria</output>
+            </div>
+          </div>
+          
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center" style="padding-bottom: 3rem">
+    <div class="card card-body-medico">
+      <!-- <img src="assets/images/medico.svg" width="100%" height="100%" > -->
+      <div class="background-medico">
+        <div class="row">
+          <div class="col-3">
+            <img
+              src="assets/images/icono_medico.png"
+              style="max-height: 5rem"
+            />
+          </div>
+          <div class="col-5">
+            <label class="label-somatometria" style="color: #2f7fe4"
+              >Nombre del médico</label
+            >
+            <h5 class="h5-medico">{{ detalleNotaMedica?.medico?.nombre }}</h5>
+          </div>
+          <div class="col-2">
+            <label class="label-somatometria" style="color: #2f7fe4"
+              >Matrícula</label
+            >
+            <h5 class="h5-medico">
+              {{ detalleNotaMedica?.medico?.matricula }}
+            </h5>
+          </div>
+          <div class="col-2">
+            <label class="label-somatometria" style="color: #2f7fe4"
+              >Cédula Profesional</label
+            >
+            <h5 class="h5-medico">
+              {{ detalleNotaMedica?.medico?.cedulaProfesional }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

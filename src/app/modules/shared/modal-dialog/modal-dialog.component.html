@@ -1,0 +1,29 @@
+<div *ngIf="modalDlg" class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;">
+</div>  
+<div *ngIf="modalDlg" class="modal modal-open" [ngClass]="{'overlay': modalDlg.type != 'tooltip'}" role="dialog" tabindex="-1" style="display: block !important; text-align: center;">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header d-block" [ngClass]="{'whiteHdr': modalDlg.type == 'tooltip'}">
+           <button *ngIf="modalDlg.type == 'tooltip' else titleTemplate" type="button" class="close" (click)="modalDlg.dismiss()"><span aria-hidden="true">&times;</span></button>
+           <ng-template #titleTemplate>
+              <output class="modal-title text-center">{{ modalDlg.title }}</output>
+           </ng-template>
+        </div>
+        <div class="modal-body" *ngIf="modalDlg.alerta == false">
+           <img *ngIf="modalDlg.type == 'tooltip' else msgTemplate" src="{{ modalDlg.imgSrc }}" style="display: block; margin-left: auto; margin-right: auto;" />
+           <ng-template #msgTemplate>
+              <p [innerHTML]="modalDlg.text"></p>
+           </ng-template>
+        </div>
+        <div class="modal-body" *ngIf="modalDlg.alerta == true">
+           <div class="alert alert-danger">
+              {{modalDlg.text}}
+           </div>
+        </div>
+        <div class="modal-footer text-center align-self-center">
+           <button *ngIf="modalDlg.type == 'confirm'" type="button" class="btn btn-default" (click)="modalDlg.reject()">Cancelar</button>
+           <button *ngIf="modalDlg.type != 'tooltip'" type="button" class="btn btn-primary" (click)="modalDlg.confirm()">{{modalDlg.acceptMessage}}</button>
+        </div>
+     </div>
+  </div>
+</div>

@@ -1,0 +1,185 @@
+<section class="header-bg">
+    <app-header></app-header>
+    <section class="container">
+        <div class="card" style="width: 100%; padding-left: 1rem; z-index: 1;">
+            <div class="align-items-center" style="display: flex; flex-direction: row; ">
+                <div style="flex: 12;">
+                    <div class="col-md-12 form-group">
+                        <!-- <h4>Búsqueda de pacientes</h4> -->
+                    </div>
+                </div>
+                <div class="rightSectionContainer">
+                    <div class="rightSectionLeft"></div>
+                    <div class="rightSectionRight"></div>
+                    <div class="rightSectionTextContainer">
+                        <h4 class="rightSectionLabel">Búsqueda de Pacientes</h4>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 12; margin-right: 1rem;">
+                <form [formGroup]="form" role="form">
+                    <div class="row field-container img-start d-flex">
+                        <div class="col-md-12 form-group">
+                            <h5 class="rightSectionLabel">Seleccione o escriba al menos un criterio de búsqueda</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label class="control-label form-group">OOAD</label>
+                            <select class="form-select" id="idOoad" formControlName="idOoad" (change)="getUnidades()">
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let ooad of ooads; trackBy: trackByFunc; let i = index"
+                                    [ngValue]="ooad.ooad">
+                                    <span>{{ ooad.ooad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label form-group">Unidad</label>
+                            <select class="form-select" id="idUnidad" formControlName="idUnidad"
+                                style="font-size: 1em !important;">
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let unidad of unidades; trackBy: trackByFunc; let i = index"
+                                    [ngValue]="unidad.unidad">
+                                    <span>{{ unidad.unidad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label form-group" for="nss">NSS paciente</label>
+                            <input appOnlyNumbers formControlName="nss" class="form-control" placeholder="NSS paciente"
+                                type="text" maxlength="10" minlength="10"
+                                [ngClass]="{ 'form-control-error': formulario.nss.touched && formulario.nss.errors }">
+                            <div *ngIf="formulario.nss.errors && formulario.nss.touched" class="form-group">
+                                <small *ngIf="formulario.nss.errors.required" class="form-text form-text-error">{{
+                                    mensaje.requerido }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label class="control-label form-group" for="nombre">Nombre</label>
+                            <input formControlName="nombre" class="form-control" placeholder="Nombre del paciente"
+                                type="text" minlength="3" (keypress)="omitSpecialChar($event)"
+                                [ngClass]="{ 'form-control-error': formulario.nombre.touched && formulario.nombre.errors }">
+                            <div *ngIf="formulario.nombre.errors && formulario.nombre.touched" class="form-group">
+                                <small *ngIf="formulario.nombre.errors.required" class="form-text form-text-error">{{
+                                    mensaje.requerido }}</small>
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label form-group" for="primerApellido">Apellidos</label>
+                            <input formControlName="primerApellido" class="form-control"
+                                placeholder="Apellidos del paciente" type="text" minlength="3" (keypress)="omitSpecialChar($event)"
+                                [ngClass]="{ 'form-control-error': formulario.primerApellido.touched && formulario.primerApellido.errors }">
+                            <div *ngIf="formulario.primerApellido.errors && formulario.primerApellido.touched"
+                                class="form-group">
+                                <small *ngIf="formulario.primerApellido.errors.required"
+                                    class="form-text form-text-error">{{
+                                    mensaje.requerido }}</small>
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="cie10" class="control-label form-group">Diagnóstico (Cie10)</label>
+                            <input type="cie10" (keyup)="getInput()" formControlName="cie10"
+                                class="form-control form-group" autocomplete="off" id="cie10" list="cie10List"
+                                placeholder="Ingresa el diagnóstico"/>
+                            <!-- <datalist id="cie10List" class="form-group">
+                                <ng-container *ngFor="let item of cie10List; let i = index">
+                                    <option>
+                                        <span>{{item.diagnostico}}</span>
+                                    </option>
+                                </ng-container>
+                            </datalist> -->
+                            <div class="form-group" *ngIf="formulario.cie10.touched && formulario.cie10.errors">
+                                <small *ngIf="(formulario.cie10.errors.required)" class="form-text form-text-error">{{
+                                    mensaje.requerido }}</small>
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label" for="radioIncapacidad">Con incapacidades:</label>
+                            <div style="margin-top: 15px;">
+                                <label class="radio-inline col-2">
+                                    <input value=false type="radio" formControlName="radioIncapacidad">No
+                                </label>
+                                <label class="radio-inline col-2">
+                                    <input value=true type="radio" formControlName="radioIncapacidad">Si
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label" for="radioEstudio">Con estudios de laboratorio:</label>
+                            <div style="margin-top: 15px;">
+                                <label class="radio-inline col-2">
+                                    <input value=false type="radio" formControlName="radioEstudio">No
+                                </label>
+                                <label class="radio-inline col-2">
+                                    <input value=true type="radio" formControlName="radioEstudio">Si
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row field-container img-end d-flex col-md-8 pull-right" style="padding-top: 1rem;">
+                        <div class="col-md-2 form-group" style="text-align: right;">
+                            <button class="btn btn-default" type="button" (click)="reset()">Limpiar</button>
+                        </div>
+                        <div class="col-md-2 form-group" style="text-align: right;">
+                            <button class="btn btn-primary" type="button" (click)="buscar(1)"
+                                [disabled]="form.invalid">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body row-margin">
+                <div class="col" style="padding-right: 1rem; padding-top: 2rem;">
+                    <div class="table table-radius">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="center header_tabla" *ngFor="let col of tableCols; let i = index;">
+                                        <div>
+                                            <div class="formGroup">{{col.header}}</div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="pacientes && pacientes.content">
+                                <tr *ngFor="let paciente of pacientes.content; let i = index;">
+                                    <td *ngFor="let cell of tableCols" class="center">
+                                        <div *ngIf="cell.field == 'nombre' else nsscell"
+                                            (click)="navigateDetail(paciente)">
+                                            <span class="label-link">{{paciente[cell.field]}}</span>
+                                        </div>
+                                        <ng-template #nsscell>
+                                            <div *ngIf="cell.field == 'nss' else sexocell">
+                                                <b>{{paciente[cell.field]}}</b>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template #sexocell>
+                                            <ng-container *ngIf="cell.field == 'sexo' else othercell">
+                                                {{paciente[cell.field] | titlecase }}
+                                            </ng-container>
+                                        </ng-template>
+                                        <ng-template #othercell>
+                                            {{paciente[cell.field]}}
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="pacientes && !pacientes.content">
+                                <tr style="background-color: #fafafa;">
+                                    <td colspan="7">Sin información disponible</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col" *ngIf="pacientes && pacientes.content">
+                <p-paginator [rows]="pageRequest.pageSize" [totalRecords]="pacientes?.totalElements"
+                    (onPageChange)="getPager($event)" [pageLinkSize]="3" [showFirstLastIcon]="false">
+                </p-paginator>
+            </div>
+        </div>
+    </section>
+</section>

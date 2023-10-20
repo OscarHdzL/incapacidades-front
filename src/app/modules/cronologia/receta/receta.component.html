@@ -1,0 +1,184 @@
+<section class="container container-padding-top">
+    <div class="card card-search-filters">
+        <div class="card-body">
+            <div class="row">
+                <form [formGroup]="form" role="form">
+                    <div class="row" style="padding-bottom: 1rem;">
+                        <div class="col-4">
+                            <label class="control-label" for="fecNota">Fecha de las recetas</label>
+                            <div class="row">
+                                <p-calendar #dateFilter [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="dd/mm/aaaa" [showIcon]="true" inputId="icon"
+                                    (onSelect)="selectedDates($event)" dataType="string" [hideOnDateTimeSelect]="true" (onClose)="clearIfNotEndDate()"
+                                    dateFormat="dd/mm/yy" selectionMode="range" [readonlyInput]="true" [yearNavigator]="true" yearRange="1996:2030" formControlName="date"
+                                    inputStyleClass="form-control" showButtonBar="true" (onClearClick)="clearDate()" [monthNavigator]="true">
+                                </p-calendar>
+                            </div>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label">OOAD</label>
+                            <select class="form-select" id="idOoad" formControlName="idOoad" (change)="ooadChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let ooad of ooads" [ngValue]="ooad.ooad">
+                                    <span>{{ ooad.ooad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label class="control-label">Unidad</label>
+                            <select class="form-select" id="idUnidad" formControlName="idUnidad"
+                                style="font-size: 1em !important;" (change)="getRecetas(1); unidadChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option *ngFor="let unidad of unidades" [ngValue]="unidad.unidad">
+                                    <span>{{ unidad.unidad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label class="control-label" for="idMedicamento">Medicamento</label>
+                            <select class="form-select" formControlName="idMedicamento" (change)="medicamentoChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option value="0" selected>Todas</option>
+                                <option *ngFor="let medicamento of medicamentos" [value]="medicamento.medicamento">
+                                    {{ medicamento.medicamento }} </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <div class="row d-flex align-items-center">
+                    <div class="col-3" *ngIf="!formulario.idMedicamento.value || formulario.idMedicamento.value==='0'">
+                        <p>
+                            Resultados &nbsp; <strong>{{ recetas?.totalElements }}</strong>
+                        </p>
+                    </div>
+                    <div class="col-3" *ngIf="formulario.idMedicamento.value && formulario.idMedicamento.value!=='0'">
+                        <p>
+                            Resultados &nbsp; <strong>{{ medicamentosTable?.totalElements }}</strong>
+                        </p>
+                    </div>
+                    <div class="col-1 flex-end d-flex align-items-center" style="padding-bottom: 1rem;">
+                        <label class="control-label">Visualizar Datos &nbsp; </label>
+                        <select (change)="getRecetas(1)" [(ngModel)]="pageRequest.pageSize"
+                            class="select-control custom-select">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <span class="caret"></span>
+                        </select>
+                    </div>
+                </div>
+                <!-- Son dos tablas porque el servicio origen (No el bypass)  -->
+                <div class="table table-radius" *ngIf="!formulario.idMedicamento.value || formulario.idMedicamento.value==='0'">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="center header_tabla" *ngFor="let head of arrayTable; let i = index;">
+                                    <div>
+                                        <div *ngIf="head?.header != 'dropdown'">
+                                            <div class="formGroup">{{head?.header}} <i class="icon-sort pull-right"
+                                                    (click)="sortTable(arrayTable[i])" style="cursor: pointer;"></i>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="head?.header == 'dropdown'">
+                                            <div class="formGroup"></div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="recetas && recetas.content">
+                            <ng-container *ngFor="let row of recetas.content; let i = index;">
+                                <tr>
+                                    <td class="center" *ngFor="let cell of arrayTable">
+                                        <div *ngIf="cell?.field != 'dropdown'">
+                                            {{row.header[cell.field]}}
+                                        </div>
+                                        <div *ngIf="(cell?.field == 'dropdown')"
+                                            data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseme'+i">
+                                            <i class="icon-angle-down icon-angle-down-color"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Inicia subtabla -->
+                                <tr id="collapseme{{i}}" class="collapse out">
+                                    <td colspan="12">
+                                        <table class="table table-striped table-striped-green">
+                                            <thead style="background-color: #dbffc0;">
+                                                <tr>
+                                                    <th class="center header_tabla" *ngFor="let head of arraySubTable;">
+                                                        <div>
+                                                            <div class="formGroup">{{head?.header}}</div>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let recipe of row.recipe;">
+                                                    <td class="center" *ngFor="let cell_ of arraySubTable">
+                                                        {{recipe[cell_.field]}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- Termina subtabla -->
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Son dos tablas porque el servicio origen (No el bypass) -->
+                <div class="table table-responsive table-striped table-radius" *ngIf="formulario.idMedicamento.value && formulario.idMedicamento.value!=='0'">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center header_tabla"
+                                    *ngFor="let head of arrayMedicamentoTable; let i = index;">
+                                    <div>
+                                        <div class="formGroup">{{head?.header}}</div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="medicamentosTable?.content">
+                            <tr *ngFor="let row of medicamentosTable.content; let i = index;">
+                                <td class="center" *ngFor="let cell of arrayMedicamentoTable">
+                                    {{row[cell.field]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col" *ngIf="recetas && recetas.content && (!formulario.idMedicamento.value || formulario.idMedicamento.value==='0') ">
+                    <p-paginator #paginator [rows]="pageRequest.pageSize" [totalRecords]="recetas?.totalElements"
+                        (onPageChange)="getPagerRecetas($event)" [pageLinkSize]="3" [showFirstLastIcon]="false">
+                    </p-paginator>
+                    <div class="row d-flex align-items-center">
+                        <div class="col-1 flex-end align-items-center">
+                            <label class="control-label" style="white-space: nowrap;">Página actual:</label>
+                        </div>
+                        <div class="col-1 align-items-center">
+                            <input disabled type="number" class="form-control"
+                                [(ngModel)]="recetas.currentPage">
+                        </div>
+                    </div>
+                </div>
+                <div class="col"
+                    *ngIf="medicamentosTable && medicamentosTable.content && formulario.idMedicamento?.value!='0' && formulario.idMedicamento?.value!=''">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-1 flex-end align-items-center">
+                            <label class="control-label" style="white-space: nowrap;">Página actual:</label>
+                        </div>
+                        <div class="col-1 align-items-center">
+                            <input disabled type="number" class="form-control"
+                                [(ngModel)]="medicamentosTable.currentPage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

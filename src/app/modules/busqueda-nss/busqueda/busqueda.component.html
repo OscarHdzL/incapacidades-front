@@ -1,0 +1,85 @@
+<section class="header-bg">
+    <app-header></app-header>
+    <section class="container">
+        <div class="card" style="width: 100%; padding-left: 1rem; z-index: 1;">
+            <div class="align-items-center" style="display: flex; flex-direction: row; ">
+                <div style="flex: 8;">
+                    <form [formGroup]="form" role="form" (ngSubmit)="buscar()">
+                        <div class="row field-container img-start d-flex " style="padding-top: 1rem;">
+                            <div class="col-4 form-group">
+                                <label class="control-label" for="nss">NSS paciente</label>
+                                <input appOnlyNumbers formControlName="nss" class="form-control"
+                                    placeholder="NSS paciente" type="text" maxlength="10" minlength="10"
+                                    [ngClass]="{ 'form-control-error': formulario.nss.touched && formulario.nss.errors }">
+                                <div *ngIf="formulario.nss.errors && formulario.nss.touched" class="form-group">
+                                    <small *ngIf="formulario.nss.errors.required" class="form-text form-text-error">{{
+                                        mensaje.requerido }}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 form-group"
+                                style="float: right; text-align: right; padding-top: 1.3%;">
+                                <button class="btn btn-default" type="button" (click)="reset()">Limpiar</button>
+                            </div>
+                            <div class="col-md-2 form-group" style="padding-top: 1.3%;">
+                                <button class="btn btn-primary" type="button" (click)="buscar()"
+                                    [disabled]="form.invalid">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="rightSectionContainer">
+                    <div class="rightSectionLeft"></div>
+                    <div class="rightSectionRight"></div>
+                    <div class="rightSectionTextContainer">
+                        <h4 class="rightSectionLabel">Búsqueda de NSS</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body row-margin">
+                <div class="col" style="padding-right: 1rem; padding-top: 2rem;">
+                    <div class="table table-radius">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="center header_tabla" *ngFor="let col of tableCols; let i = index;">
+                                        <div>
+                                            <div class="formGroup">{{col.header}}</div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="pagePaciente && pagePaciente.content">
+                                <tr *ngFor="let paciente of pagePaciente.content; let i = index;">
+                                    <td *ngFor="let cell of tableCols" class="center">
+                                        <div *ngIf="cell.field == 'nombre' else nsscell"
+                                            (click)="navigateDetail(paciente)">
+                                            <span class="label-link">{{paciente[cell.field]}}</span>
+                                        </div>
+                                        <ng-template #nsscell>
+                                            <div *ngIf="cell.field == 'nss' else sexocell">
+                                                <b>{{paciente[cell.field]}}</b>
+                                            </div>
+                                        </ng-template>
+                                        <ng-template #sexocell>
+                                            <ng-container *ngIf="cell.field == 'sexo' else othercell">
+                                                {{paciente[cell.field] | titlecase }}
+                                            </ng-container>
+                                        </ng-template>
+                                        <ng-template #othercell>
+                                            {{paciente[cell.field]}}
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="pagePaciente && !pagePaciente.content">
+                                <tr style="background-color: #fafafa;">
+                                    <td colspan="7">Sin información disponible</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

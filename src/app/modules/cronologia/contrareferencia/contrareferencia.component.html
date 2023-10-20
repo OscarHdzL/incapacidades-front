@@ -1,0 +1,263 @@
+<section class="container container-padding-top">
+    <div class="card card-header-top-radius card-header-bottom-radius">
+        <div class="card-body">
+            <div class="row d-flex align-items-center">
+                <div class="col-2 col-margin-sep-pipe" style="padding-left: 2rem;">
+                    <h5>{{ contrareferencia?.unidadExpedidora }}, {{ contrareferencia?.delegacionExpedidora }}</h5>
+                </div>
+                <div class="col-3">
+                    <h5 class="capital">{{ dateHeaderParsed }}</h5>
+                </div>
+                <div class="col-7">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-3 col-margin-sep">
+                            <label>Turno</label>
+                            <output>{{contrareferencia?.desTurno}}</output>
+                        </div>
+                        <div class="col-3">
+                            <label>Consultorio</label>
+                            <output>{{contrareferencia?.consultorioAtencion}}</output>
+                        </div>
+                        <!--div class="col-2">
+                            <div class="img-end">
+                                <span>
+                                    <img src="assets/images/icon_referencia_header.png" class="img-container-header">
+                                </span>
+                            </div>
+                        </div-->
+                        <div class="col-3" [ngClass]="(1 >= actualIndex)  ? 'arrows-referencia-disabled' : 'arrows-referencia'" (click)="getDetalleContrareferencia(actualIndex - 1)">
+                            <div class="row d-flex align-items-center justify-content-start">
+                                <div class="col-2 img">
+                                    <span><img src="assets/images/arrow-left.svg"></span>
+                                </div>
+                                <div class="col-8">
+                                    Contrarreferencia <br />anterior
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3" [ngClass]="(actualIndex) === contrarreferencias.totalElements ? 'arrows-referencia-disabled' : 'arrows-referencia'" (click)="getDetalleContrareferencia(actualIndex + 1)">
+                            <div class="row d-flex align-items-center justify-content-end" style="padding-right: 1rem;">
+                                <div class="col">
+                                    Contrarreferencia <br />siguiente
+                                </div>
+                                <div class="col img">
+                                    <span><img src="assets/images/arrow-right.svg"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col referencia-header-bg">
+                <div class="row d-flex align-items-center justify-content-center" style="padding-top: .5rem;">
+                    <div class="col-3 margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col-2 col-img">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_tipo_consulta.svg"
+                                            class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label class="label-somatometria">Fecha alta servicio</label>
+                                <!-- <output>{{contrareferencia?.fechaAltaServicio | date:"dd/MM/yyyy"}}</output> -->
+                                <output>{{contrareferencia?.fechaAltaServicio |  slice : 0 : 10}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col-2 col-img">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_fecha_primera_consulta.svg"
+                                            class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label class="label-somatometria">Fecha de primera consulta</label>
+                                <!-- <output>{{contrareferencia?.fechaAltaServicio | date:"dd/MM/yyyy"}}</output> -->
+                                <output>{{contrareferencia?.fechaPrimeraConsulta |  slice : 0 : 10}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col-2 col-img">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_ocasion.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label class="label-somatometria">Consultas otorgadas</label>
+                                <output>{{contrareferencia?.consultasOtorgadas}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col-2 col-img">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_referencia_motivo_envio.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <label class="label-somatometria">Diagnóstico final</label>
+                                <output>{{contrareferencia?.diagnosticoFinal}}</output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="padding-top: 1rem;">
+                    <div class="col-11">
+                        <div class="rounded-radiants">
+                            <div class="row justify-content-center align-items-center hdr-tr" style="padding: 1rem;">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_delegacion_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>OOAD a la que se envía</label>
+                                            <output>{{contrareferencia?.delegacionDestino}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_unidad_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Unidad a la que se envía</label>
+                                            <output>{{contrareferencia?.unidadDestino}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_especialidad_envio.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Especialidad a la que se envía</label>
+                                            <output>{{contrareferencia?.especialidad}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_referencia_diagnostico.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <label>Diagnóstico inicial</label>
+                                            <output>{{contrareferencia?.diagnosticoInicial}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-11 border-bottom-referencia-header"></div>
+                        </div>
+                        <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                                <label class="control-label row-spacer">Pronóstico</label>
+                            </div>
+                            <div class="col-8">
+                                <output class="control-label row-spacer">{{ contrareferencia?.pronostico }}</output>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 1rem;">
+                            <div class="col-4">
+                                <label class="control-label row-spacer">Medicamento</label>
+                            </div>
+                            <div class="col-8">
+                                <output class="control-label row-spacer">{{ contrareferencia?.medicamento }}</output>
+                            </div>
+                        </div>
+                        <!--<div class="col-12" style="padding: 1rem;">
+                            <div class="col-5">
+                                <label class="control-label row-spacer">Requiere transcripción de medicamento en su unidad de origen</label>
+                            </div>
+                            <div class="col-7">
+                                <output class="sroll-resumen-clinico">{{ '' }}</output>
+                            </div>
+                        </div>
+                        <div class="col-12" style="padding: 1rem;">
+                            <div class="col-5">
+                                <label class="control-label row-spacer">Durante</label>
+                            </div>
+                            <div class="col-7">
+                                <output class="sroll-resumen-clinico">{{ '' }}</output>
+                            </div>
+                        </div>
+                        <div class="col-12" style="padding: 1rem;">
+                            <div class="col-5">
+                                <label class="control-label row-spacer">Otras medidas terapéuticas</label>
+                            </div>
+                            <div class="col-7">
+                                <output class="sroll-resumen-clinico">{{ '' }}</output>
+                            </div>
+                        </div>
+                        <div class="col-12" style="padding: 1rem;">
+                            <div class="col-5">
+                                <label class="control-label row-spacer">Requiere nueva valoración</label>
+                            </div>
+                            <div class="col-7">
+                                <output class="sroll-resumen-clinico">{{ '' }}</output>
+                            </div>
+                        </div>
+                        <div class="col-12" style="padding: 1rem;">
+                            <div class="col-5">
+                                <label class="control-label row-spacer">Cuándo</label>
+                            </div>
+                            <div class="col-7">
+                                <output class="sroll-resumen-clinico">{{ '' }}</output>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="row justify-content-end align-items-center" *ngIf="contrarreferencias" style="padding-right: 1rem;">
+                    <div class="col-2" *ngIf="contrarreferencias && contrarreferencias.content">
+                        <p-paginator [rows]="pageRequest.pageSize" [totalRecords]="contrarreferencias?.totalElements"
+                            (onPageChange)="getPagerContrarreferencias($event)" [pageLinkSize]="3" [(first)]="paginatorFirstIndex"
+                            [showFirstLastIcon]="false">
+                        </p-paginator>
+                    </div>
+                    <div class="col-1" *ngIf="contrarreferencias && contrarreferencias.content" style="font-size: 14px;">
+                        Resultados
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

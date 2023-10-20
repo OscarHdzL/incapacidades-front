@@ -1,0 +1,181 @@
+<section class="container container-padding-top">
+    <div class="card card-header-top-radius card-header-bottom-radius">
+        <div class="card-body">
+            <div class="row d-flex align-items-center">
+                <div class="col-2 col-margin-sep-pipe" style="padding-left: 2rem;">
+                    <h5>{{ incapacidad?.unidad }}, {{ incapacidad?.ooad }}</h5>
+                </div>
+                <div class="col-5">
+                    <h5 class="capital">{{ dateHeaderParsed }}</h5>
+                </div>
+                <div class="col-5 tur-con">
+                    <div class="row d-flex align-items-center justify-content-start">
+                        <div class="col-3">
+                            <label>Folio: <span style="color: black;">{{incapacidad?.folio}}</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col referencia-header-bg">
+                <div class="row d-flex align-items-center justify-content-center" style="padding-top: .5rem;">
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_inc.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Fecha inicial</label>
+                                <output>{{incapacidad?.fechaInicio}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_inc.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Fecha de término</label>
+                                <output>{{incapacidad?.fechaTermino}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_dia.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días autorizados</label>
+                                <output>{{incapacidad?.diasAutorizados}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_recupera.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días probables de recuperación</label>
+                                <output>{{incapacidad?.diasProbables}}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_recupera.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días acumulados</label>
+                                <output>{{incapacidad?.diasAcumulados}}</output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="padding-top: 1rem;">
+                    <div class="col-11">
+                        <div class="rounded-radiants hdr-tr">
+                            <div class="row justify-content-center align-items-center" style="padding: 1rem;">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_enfermedad_gral.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Ramo de seguro</label>
+                                            <output>{{incapacidad?.ramoSeguro}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_tipo_incapacidad.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Tipo de incapacidad</label>
+                                            <output>{{incapacidad?.tipoIncapacidad}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_ocupacion.svg" class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Ocupación</label>
+                                            <output>{{incapacidad?.ocupacion}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_patron.svg" class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Patrón</label>
+                                            <output>{{incapacidad?.patron}}</output>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-11 border-bottom-referencia-header"></div>
+                        </div>
+                        <div class="row d-flex row-spacer" style="padding-bottom: 1rem; padding-left: 1rem;">
+                            <div class="col-2">
+                                <label class="col-12 control-label">Diagnóstico</label>
+                            </div>
+                            <div class="col-8">
+                                <output class="col-12">{{ incapacidad?.diagnostico }}</output>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

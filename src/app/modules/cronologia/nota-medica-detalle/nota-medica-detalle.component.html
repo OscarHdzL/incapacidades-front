@@ -1,0 +1,245 @@
+<section class="container container-padding-top">
+    <div class="card" style="width: 100%; border-radius: 1rem;">
+        <div class="row d-flex align-items-center" style="padding-left: 1rem; padding-right: 1rem;">
+            <div class="col-3">
+                <h5>{{ detalleNotaMedica?.notaMedicaParent?.unidad }}, {{ detalleNotaMedica?.notaMedicaParent?.ooad }}
+                </h5>
+            </div>
+            <div class="col-5">
+                <h5 class="capital">{{ dateHeaderParsed }}</h5>
+            </div>
+            <div class="col-4 img-end-flechas">
+                <div class="row">
+                    <div class="col-sm-6 svg-arrows">
+                        <img [ngStyle]="{'opacity' : validIndex(actualNotaIndex - 1) ? 1 : .4 }" src="assets/images/icon_nota_anterior.svg"
+                            (click)="getDetalleNotaMedica(actualNotaIndex - 1)">
+                    </div>
+                    <div class="col-sm-6 svg-arrows">
+                        <img [ngStyle]="{'opacity' : validIndex(actualNotaIndex + 1) ? 1 : .4 }" src="assets/images/icon_nota_siguiente.svg"
+                            (click)="getDetalleNotaMedica(actualNotaIndex + 1)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body row-margin">
+            <div class="row d-flex align-items-center">
+                <!-- <div class="row"> -->
+                <div class="col-2 col-img">
+                    <div class="img">
+                        <span>
+                            <img src="assets/images/somatometria_header.png" class="img-container">
+                        </span>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div class="col-10">
+                    <div class="row">
+                        <label class="label-somatometria"
+                            style="font-weight: bold; color: #404041;">Somatometría</label>
+                    </div>
+                    <div class="row">
+                        <div class="col col-margin-sep" style="max-width: 6rem;">
+                            <output class="control-label">{{detalleNotaMedica?.somatometria?.estatura}} m</output>
+                            <label class="label-somatometria">Estatura</label>
+                        </div>
+                        <div class="col col-margin-sep" style="max-width: 6rem;">
+                            <output class="control-label">{{detalleNotaMedica?.somatometria?.peso}} Kg</output>
+                            <label class="label-somatometria">Peso</label>
+                        </div>
+                        <div class="col col-margin-sep" style="max-width: 8rem;">
+                            <output class="control-label">{{detalleNotaMedica?.somatometria?.temperatura}} °C</output>
+                            <label class="label-somatometria">Temperatura</label>
+                        </div>
+                        <div class="col col-margin-sep">
+                            <output class="control-label">{{detalleNotaMedica?.somatometria?.presionArterialsis}}mmHg /
+                                {{
+                                detalleNotaMedica?.somatometria?.presionArterialdia }}mmHg</output>
+                            <label class="label-somatometria">Presión arterial</label>
+                        </div>
+                        <div class="col col-margin-sep">
+                            <output class="control-label">{{ detalleNotaMedica?.somatometria?.frecuenciaCardiaca }}
+                                latidos/min</output>
+                            <label class="label-somatometria">Frecuencia cardiaca</label>
+                        </div>
+                        <div class="col col-margin-sep">
+                            <output class="control-label">{{ detalleNotaMedica?.somatometria?.frecuenciaRespiratoria }}
+                                resp./min</output>
+                            <label class="label-somatometria">Frecuencia respiratoria</label>
+                        </div>
+                        <div class="col col-margin-sep" style="max-width: 8rem;">
+                            <output class="control-label">{{ detalleNotaMedica?.somatometria?.glucosa }} mg/dl</output>
+                            <label class="label-somatometria">Glucosa</label>
+                        </div>
+                        <div class="col">
+                            <output class="control-label">{{ detalleNotaMedica?.somatometria?.saturacion }} %</output>
+                            <label class="label-somatometria">Saturación de Oxígeno</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row-margin-div"></div>
+            <div class="row d-flex row-spacer body-tit" style="padding-left: 1rem; padding-bottom: 1rem;">
+                <div class="col-5 col-margin-sep">
+                    <label class="row-spacer">Resumen Clínico</label>
+                    <output class="sroll-resumen-clinico">{{ detalleNotaMedica?.resumenClinico }}</output>
+                    <label class="row-spacer">Exploración física</label>
+                    <output>{{ detalleNotaMedica?.exploracionFisica }}</output>
+                    <label class="row-spacer">Motivo para no generar exploración médica</label>
+                    <output>{{ detalleNotaMedica?.motivoParaNoRegistrarExploracionFisica }}</output>
+                    <label class="row-spacer">Indicaciones adicionales</label>
+                    <output>{{ detalleNotaMedica?.indicacionesAdicionales }}</output>
+                </div>
+                <div class="col-7">
+                    <div class="row row-spacer" style="width: 98%;">
+                        <div class="col">
+                            <label>Diagnóstico</label>
+                        </div>
+                        <div class="col">
+                            <label>Tipo de diagnóstico</label>
+                        </div>
+                        <div class="col">
+                            <label>Complemento Dx</label>
+                        </div>
+                    </div>
+                    <div *ngFor="let dx of detalleNotaMedica?.diagnosticos">
+                        <div class="row row-spacer" style="width: 98%;">
+                            <div class="col">
+                                <output>{{ dx.diagnostico }}</output>
+                            </div>
+                            <div class="col">
+                                <output>{{ dx.ocasion }}</output>
+                            </div>
+                            <div class="col">
+                                <output>{{ dx.complementoDx }}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-spacer" style="width: 98%;">
+                        <div class="col">
+                            <label>Procedimiento</label>
+                        </div>
+                        <div class="col">
+                            <label>Tipo de procedimiento</label>
+                        </div>
+                        <div class="col">
+                            <label>Complemento Px</label>
+                        </div>
+                    </div>
+                    <div *ngFor="let px of detalleNotaMedica?.procedimiento; let i = index;" class="row-spacer">
+                        <div class="row row-margin-bottom">
+                            <div class="col">
+                                <output>{{ px.procedimiento }}</output>
+                            </div>
+                            <div class="col">
+                                <output>{{ px.ocasion }}</output>
+                            </div>
+                            <div class="col">
+                                <output>{{ px.complementoDx }}</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-spacer">
+                    </div>
+                    <div class="row row-spacer">
+                        <div class="col-5 col-padding-card" *ngIf="indicadoresAuxiliares?.existsRecipes == true">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="navigation(i);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_recetas_medicas.svg" class="card-icon"
+                                        class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Recetas médicas</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 col-padding-card" *ngIf="false">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="menuSelectEvent.emit(idMenuConstant.imagenologia);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_solicitud_imagenologia.svg" class="card-icon"
+                                        class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Solicitud de imagenología</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 col-padding-card" *ngIf="indicadoresAuxiliares?.existsReferences == true">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="menuSelectEvent.emit(idMenuConstant.referencia);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_referencias.svg" class="card-icon"
+                                        class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Referencias</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 col-padding-card"
+                            *ngIf="indicadoresAuxiliares?.existsContraReferences == true">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="menuSelectEvent.emit(idMenuConstant.contrareferencia);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_contrareferencias.svg" class="card-icon"
+                                        class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Contrarreferencia</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 col-padding-card" *ngIf="indicadoresAuxiliares?.existsInability == true">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="menuSelectEvent.emit(idMenuConstant.incapacidadesDetalle);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_incapacidades_2.svg" class="card-icon" class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Incapacidades</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 col-padding-card" *ngIf="false">
+                            <div class="card-auxiliar d-flex align-items-center justify-content-center"
+                                (click)="menuSelectEvent.emit(idMenuConstant.laboratorio);">
+                                <div class="col-2">
+                                    <img src="assets/images/icon_solicitud_lab.svg" class="card-icon"
+                                        class="card-auxiliar-img">
+                                </div>
+                                <div class="col-10">
+                                    <label style="cursor: pointer;">Solicitud de Laboratorio</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center" style="padding-bottom: 3rem;">
+        <div class="card card-body-medico ">
+            <!-- <img src="assets/images/medico.svg" width="100%" height="100%" > -->
+            <div class="background-medico">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="assets/images/icono_medico.png" style="max-height: 5rem;">
+                    </div>
+                    <div class="col-5">
+                        <label class="label-somatometria" style="color: #2f7fe4;">Nombre del médico</label>
+                        <h5 class="h5-medico">{{detalleNotaMedica?.medico?.nombre}}</h5>
+                    </div>
+                    <div class="col-2">
+                        <label class="label-somatometria" style="color: #2f7fe4;">Matrícula</label>
+                        <h5 class="h5-medico">{{detalleNotaMedica?.medico?.matricula}}</h5>
+                    </div>
+                    <div class="col-2">
+                        <label class="label-somatometria" style="color: #2f7fe4;">Cédula Profesional</label>
+                        <h5 class="h5-medico">{{detalleNotaMedica?.medico?.cedulaProfesional}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

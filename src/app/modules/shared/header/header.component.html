@@ -1,0 +1,29 @@
+<section>
+    <div class="container">
+        <div class="row" style="padding-bottom: 1rem;">
+            <div class="col-6 align-self-center">
+                <output style="color: white; font-size: 22px;">Historial clínico</output>
+            </div>
+            <div class="col-5">
+                <div class="row" style="text-align: right;">
+                    <p style="font-family: Montserrat;
+                                font-size: 14px;
+                                font-weight: 500;
+                                font-stretch: normal;
+                                font-style: normal;
+                                color: #ffffff;">{{ usuario | titlecase }}</p>
+                    <p style="font-family: Montserrat;
+                                font-size: 14px;
+                                font-weight: normal;
+                                font-stretch: normal;
+                                font-style: normal;
+                                color: #999999;">{{ rol | titlecase }}</p>
+                </div>
+            </div>
+            <div class="col-1 align-self-center" style="text-align: right;">
+                <label style="font-size: 14px; color: #ffffff; cursor: pointer;" (click)="logout()">Cerrar
+                    sesión</label>
+            </div>
+        </div>
+    </div>
+<section>

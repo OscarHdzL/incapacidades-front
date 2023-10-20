@@ -1,0 +1,164 @@
+<section class="container container-padding-top">
+  <div class="card card-search-filters">
+      <div class="card-body">
+          <div class="row">
+              <form [formGroup]="form" role="form">
+                  <div class="row" style="padding-bottom: 1rem;">
+                      <div class="col-4">
+                          <label class="control-label" for="fecNota">Fecha de las incapacidades</label>
+                          <div class="row">
+                              <p-calendar #dateFilter placeholder="dd/mm/aaaa" [showIcon]="true" inputId="icon"
+                                  [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" (onClose)="clearIfNotEndDate()"
+                                  (onSelect)="selectedDates($event)" dataType="string" [hideOnDateTimeSelect]="true"
+                                  dateFormat="dd/mm/yy" selectionMode="range" [readonlyInput]="true" formControlName="date"
+                                  [yearNavigator]="true" yearRange="1996:2030" inputStyleClass="form-control"
+                                  showButtonBar="true" (onClearClick)="clearDate()" [monthNavigator]="true">
+                              </p-calendar>
+                          </div>
+                      </div>
+                      <div class="col-4 form-group">
+                          <label class="control-label">OOAD</label>
+                          <select class="form-select" id="idOoad" formControlName="idOoad" (change)="ooadChange()">
+                              <option value="" selected>Seleccionar</option>
+                              <option value="" selected>Todas</option>
+                              <option *ngFor="let ooad of ooads" [ngValue]="ooad.delegacion_expedidora">
+                                  <span>{{ ooad.delegacion_expedidora }}</span>
+                              </option>
+                          </select>
+                      </div>
+                      <div class="col-4">
+                          <label class="control-label">Unidad</label>
+                          <select class="form-select" id="idUnidad" formControlName="idUnidad"
+                              style="font-size: 1em !important;" (change)="unidadChange()">
+                              <option value="" selected>Seleccionar</option>
+                              <option value="" selected>Todas</option>
+                              <option *ngFor="let unidad of unidades" [ngValue]="unidad.unidad_expedidora">
+                                  <span>{{ unidad.unidad_expedidora }}</span>
+                              </option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="row" style="padding-bottom: 1rem;">
+                      <div class="col-6">
+                          <label class="control-label" for="idDiagnostico">Diagnóstico</label>
+                          <select class="form-select" formControlName="idDiagnostico" (change)="diagnosticoChange()">
+                              <option value="" selected>Seleccionar</option>
+                              <option value="" selected>Todas</option>
+                              <option *ngFor="let diagnostico of diagnosticos" [value]="diagnostico.diagnostico">
+                                  {{ diagnostico.diagnostico }} </option>
+                          </select>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="col">
+              <div class="row d-flex align-items-center">
+                  <div class="col-3">
+                      <p>
+                          Resultados &nbsp; <strong>{{ resultadosIncapacidades?.totalElements }}</strong>
+                      </p>
+                  </div>
+                  <div class="col-1 flex-end d-flex align-items-center" style="padding-bottom: 1rem;">
+                      <label class="control-label">Visualizar Datos &nbsp; </label>
+                      <select (change)="getResultadosIncapacidades(1)" [(ngModel)]="pageRequest.pageSize"
+                          class="select-control custom-select">
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <span class="caret"></span>
+                      </select>
+                  </div>
+              </div>
+              <!-- Son dos tablas porque el servicio origen (No el bypass) -->
+              <div class="table-radius">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th class="center header_tabla" *ngFor="let head of arrayTable; let i = index;">
+                                  <div>
+                                      <div *ngIf="head?.header != 'dropdown'">
+                                          <div class="formGroup">{{head?.header}} <i class="icon-sort pull-right"
+                                                  (click)="sortTable(arrayTable[i])" style="cursor: pointer;"></i>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="resultadosIncapacidades && resultadosIncapacidades.content">
+                          <ng-container *ngFor="let row of resultadosIncapacidades.content; let i = index;">
+                              <tr>
+                                  <td class="center" *ngFor="let cell of arrayTable">
+                                      {{row[cell.field]}}
+                                      <div *ngIf="(cell?.field == 'dropdown')" data-bs-toggle="collapse"
+                                          [attr.data-bs-target]="'#collapseme'+i" style="float: right;">
+                                          <i class="icon-chevron-sign-down icon-angle-down-color"></i>
+                                      </div>
+                                  </td>
+                              </tr>
+                              
+                                  
+                                  <tr id="collapseme{{i}}" class="collapse out">
+                                  <td colspan="12">
+                                      <table class="table">
+                                          <thead style="background-color: #DCF7E9;">
+                                              <tr>
+                                                  <th class="center header_tabla" *ngFor="let head of arraySubTable;">
+                                                      <div>
+                                                          <div class="formGroup">{{head?.header}}</div>
+                                                      </div>
+                                                  </th>
+                                              </tr>
+                                          </thead>
+                                          <tbody style="background-color: white !important;">
+                                              <tr>
+                                                  
+                                                                                                      
+                                                  <td class="center" *ngFor="let cell_ of arraySubTable">
+
+                                                      
+                                                      <span *ngIf="cell_.field == 'folio'">
+                                                          <a href="javascript:;" (click)="navigateDetail(row)">
+                                                              {{row[cell_.field]}}
+                                                          </a>
+                                                          
+                                                      </span>
+                                                      <span *ngIf="cell_.field != 'folio'">
+                                                          {{row[cell_.field]}}
+                                                      </span>
+
+                                                      
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <!-- Termina subtabla -->
+                          </ng-container>
+                      </tbody>
+                  </table>
+              </div>
+              <!-- Son dos tablas porque el servicio origen (No el bypass) -->
+              <div class="col"
+                  *ngIf="resultadosIncapacidades && resultadosIncapacidades.content && !formulario.idDiagnostico.value">
+                  <p-paginator #paginator [rows]="pageRequest.pageSize"
+                      [totalRecords]="resultadosIncapacidades?.totalElements"
+                      (onPageChange)="getPagerResultadosInacapacidad($event)" [pageLinkSize]="3"
+                      [showFirstLastIcon]="false">
+                  </p-paginator>
+                  <div class="row d-flex align-items-center">
+                      <div class="col-1 flex-end align-items-center">
+                          <label class="control-label" style="white-space: nowrap;">Página actual:</label>
+                      </div>
+                      <div class="col-1 align-items-center">
+                          <input disabled type="number" class="form-control"
+                              [(ngModel)]="resultadosIncapacidades.currentPage">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

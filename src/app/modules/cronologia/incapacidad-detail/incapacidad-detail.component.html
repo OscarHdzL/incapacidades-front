@@ -1,0 +1,212 @@
+<section class="container container-padding-top">
+    <div class="card card-header-top-radius card-header-bottom-radius">
+        <div class="card-body">
+            <div class="row d-flex align-items-center">
+                <div class="col-3" style="padding-left: 2rem;">
+                    <h5>{{ incapacidadDetail?.unidad_expedidora }}, {{ incapacidadDetail?.delegacion_expedidora }}</h5>
+                    <!-- <h5>HES Oblatos, Jalisco</h5> -->
+                </div>
+                <div class="col-1 ">
+                    <h5 class="capital" style="text-align: center; vertical-align: middle;">|</h5>
+                </div>
+                <div class="col-3 ">
+                    <h5 class="capital">{{ dateHeaderParsed }}</h5>
+                </div>
+                <div class="col-5 tur-con">
+                    <div class="row d-flex align-items-center justify-content-start">
+                        <div class="col-2">
+                            <label>Turno: <br>
+                                <!-- <span style="color: black;">{{incapacidad?.folio}}</span> -->
+                                <span style="color: black;">{{ incapacidadDetail?.des_turno}}</span>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <label>Consultorio: <br>
+                                <!-- <span style="color: black;">{{incapacidad?.folio}}</span> -->
+                                <span style="color: black;">{{incapacidadDetail?.consultorio_atencion}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col referencia-header-bg">
+                <div class="row d-flex align-items-center justify-content-center" style="padding-top: .5rem;">
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_inc.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Fecha inicial</label>
+                                <output>{{incapacidadDetail?.fecha_inicio }}</output>
+                                <!-- <output>22/12/2021</output> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_inc.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Fecha de término</label>
+                                <output>{{incapacidadDetail?.fecha_termino }}</output>
+                                <!-- <output>22/12/2021</output> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_dia.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días autorizados</label>
+                                <output>{{incapacidadDetail?.dias_autorizados}}</output>                           
+                                <!-- <output>22</output> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin-right-header-referencia">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_recupera.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días probables de recuperación</label>
+                                <output>{{incapacidadDetail?.dias_probables_recuperacion}}</output>       
+                                <!-- 
+                                <output>12</output> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col col-img" style="text-align: right;">
+                                <div class="img">
+                                    <span>
+                                        <img src="assets/images/icon_calendar_recupera.svg" class="img-container">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Días acumulados</label>
+                                <output>{{incapacidadDetail?.dias_acumulados}}</output>       
+                                
+                                <!-- <output>21</output> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" style="padding-top: 1rem;">
+                    <div class="col-11">
+                        <div class="rounded-radiants hdr-tr">
+                            <div class="row justify-content-center align-items-center" style="padding: 1rem;">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_enfermedad_gral.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Ramo de seguro</label>
+                                            <output>{{incapacidadDetail?.ramo_seguro}}</output>       
+                                            
+                                <!-- <output>Riesgo trabajo</output> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_tipo_incapacidad.svg"
+                                                        class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Tipo de incapacidad</label>
+                                            <output>{{incapacidadDetail?.tipo_incapacidad}}</output>       
+                                <!-- <output>Subsecuente</output> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_ocupacion.svg" class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Ocupación</label>
+                                            <output>{{incapacidadDetail?.ocupacion}}</output>       
+                                            
+                                <!-- <output>Lavandero</output> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-3 col-img">
+                                            <div class="img">
+                                                <span>
+                                                    <img src="assets/images/icon_patron.svg" class="img-container">
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style="margin-left: 5px;">
+                                            <label>Patrón</label>
+                                            <output>{{incapacidadDetail?.nombre_patron}}</output>       
+                                            
+                                <!-- <output>Patron SA de CV</output> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-11 border-bottom-referencia-header"></div>
+                        </div>
+                        <div class="row d-flex row-spacer" style="padding-bottom: 1rem; padding-left: 1rem;">
+                            <div class="col-2">
+                                <label class="col-12 control-label">Diagnóstico</label>
+                            </div>
+                            <div class="col-8">
+                                
+                                <output>{{incapacidadDetail?.diagnostico}}</output>       
+                                <!-- <output>Secuelas de traumatismo intracreaneal</output> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

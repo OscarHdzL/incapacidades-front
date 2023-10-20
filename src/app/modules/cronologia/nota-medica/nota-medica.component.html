@@ -1,0 +1,184 @@
+<section class="container">
+    <div class="card" style="width: 100%; border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem; margin-top: 1rem">
+        <div class="card-body" style="font-size: .9em;">
+            <div class="row">
+                <form [formGroup]="form" role="form">
+                    <div class="row" style="padding-bottom: 1rem;">
+                        <div class="col-2">
+                            <label class="control-label" for="fecNota">Fecha de las notas</label>
+                            <div class="row">
+                                <p-calendar #dateFilter placeholder="dd/mm/aaaa" [showIcon]="true" inputId="icon" formControlName="date"
+                                    (onSelect)="selectedDates($event)" dataType="string" [hideOnDateTimeSelect]="true" (onClose)="clearIfNotEndDate()"
+                                    dateFormat="dd/mm/yy" selectionMode="range" [readonlyInput]="true" [yearNavigator]="true" yearRange="1996:2030"
+                                    inputStyleClass="form-control" showButtonBar="true" (onClearClick)="clearDate()" [monthNavigator]="true">
+                                </p-calendar>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label">OOAD</label>
+                            <select class="form-select" id="idOoad" formControlName="idOoad" (change)="ooadChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let ooad of ooads; trackBy: trackByFunc; let i = index" [ngValue]="ooad.ooad">
+                                    <span>{{ ooad.ooad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label">Unidad</label>
+                            <select class="form-select" id="idUnidad" formControlName="idUnidad"
+                                style="font-size: 1em !important;" (change)="unidadChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let unidad of unidades; trackBy: trackByFunc; let i = index" [ngValue]="unidad.unidad">
+                                    <span>{{ unidad.unidad }}</span>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label class="control-label" for="especialidad">Especialidad</label>
+                            <select class="form-select" formControlName="idEspecialidad"
+                                (change)="especialidadChange()">
+                                <option value="" selected>Seleccionar</option>
+                                <option value="" selected>Todas</option>
+                                <option *ngFor="let especialidad of especialidades; trackBy: trackByFunc; let i = index" [value]="especialidad.especialidad">
+                                    {{ especialidad.especialidad }} </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <div class="row d-flex align-items-center">
+                    <div class="col-9">
+                        <p>
+                            Resultados &nbsp; <strong>{{ notasMedicas?.totalElements }}</strong>
+                        </p>
+                    </div>
+                    <div class="col-1 flex-end align-items-center" style="padding-bottom: 1rem;">
+                        <label style="white-space: nowrap;">Visualizar Datos &nbsp; </label>
+                        <select (change)="getNotasMedicas(1)" [(ngModel)]="pageRequest.pageSize" class="select-control custom-select">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <span class="caret"></span>
+                        </select>
+                    </div>
+                </div>
+                <div class="table table-radius">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <ng-container *ngFor="let head of arrayTable; let i = index; trackBy: trackByFunc;">
+                                    <th *ngIf="head?.header != 'referenciaMenu' && head?.header != 'dropdown' && head?.field != 'fecha' && head?.field != 'ooad'" class="tbl-dx-min center header_tabla">
+                                        <label>{{head.header}}</label> <i class="icon-sort pull-right"
+                                            (click)="sortTable(arrayTable[i])" style="cursor: pointer;"></i>
+                                    </th>
+                                    <th *ngIf="head?.header == 'referenciaMenu'" style="width: 1px;">
+                                        <label></label>
+                                    </th>
+                                    <th *ngIf="head?.header == 'dropdown'" style="width: 1px;">
+                                        <label></label>
+                                    </th>
+                                    <th *ngIf="head?.field == 'fecha'" class="center header_tabla">
+                                        <label>{{head.header}}</label><i class="icon-sort pull-right"
+                                        (click)="sortTable(arrayTable[i])" style="cursor: pointer;"></i>
+                                    </th>
+                                    <th *ngIf="head?.field == 'ooad'" class="tbl-dx-min-ooad center header_tabla">
+                                        <label>{{head.header}}</label><i class="icon-sort pull-right"
+                                        (click)="sortTable(arrayTable[i])" style="cursor: pointer;"></i>
+                                    </th>
+                                </ng-container>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="notasMedicas && notasMedicas.content">
+                            <ng-container *ngFor="let row of notasMedicas.content; let i = index; trackBy: trackByFunc;">
+                            <tr>
+                                <td class="center" *ngFor="let cell of arrayTable; trackBy: trackByFunc;">
+                                    <div *ngIf="cell?.field != 'fecha'">
+                                        {{row[cell.field]}}
+                                    </div>
+                                    <div *ngIf="cell?.field == 'referenciaMenu'" class="dropdown">
+                                        <span style="cursor: pointer;"><img src="assets/images/dots_referencia.svg" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenu">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                                <option value="0" class="select-control-menu" (click)="navigateRef(idMenuConstant.referencia, i);">Referencia</option>
+                                                <option value="1" class="select-control-menu" (click)="navigateRef(idMenuConstant.contrareferencia, i);">Contrarreferencia</option>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="cell?.field == 'fecha' && cell?.field != 'referenciaMenu' " class="label-link" (click)="navigateDetail(i)">
+                                        {{row[cell.field] | fechaCorta}}
+                                    </div>
+                                    <div *ngIf="(cell?.field == 'dropdown')" data-bs-toggle="collapse"
+                                            [attr.data-bs-target]="'#collapseme'+i" style="float: right;">
+                                            <i class="icon-chevron-sign-down icon-angle-down-color"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- SUB TABLE - /* MODIFICAR LIMON */ -->
+                            <tr id="collapseme{{i}}" class="collapse out">
+                                <td colspan="12">
+                                    <table class="table">
+                                        <!-- <thead >
+                                            <tr class="headerTableNota">
+                                                <th class="center " *ngFor="let head of arraySubTable;">
+                                                    <div>
+                                                        <div class="formGroup">{{head?.header}}</div>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead> -->
+                                        <tbody style="background-color: white !important;">
+                                            <tr class="headerTableNota">
+                                                <td class="center header_tabla">Fecha</td>
+                                                <td class="tbl-dx-min-ooad center header_tabla"></td>
+                                                <td class="tbl-dx-min center header_tabla">Notas</td>
+                                                <td class="tbl-dx-min center header_tabla">Especialidad</td>
+                                                <td class="tbl-dx-min center header_tabla">Diagnostico principal</td>
+                                                <td class="tbl-dx-min center header_tabla"></td>
+                                                <td class="tbl-dx-min center header_tabla"></td>
+                                                <td style="width: 1px;"></td>
+                                            </tr>
+
+
+                                            <tr *ngFor="let subnota of row.subNotasMedicas">                                         
+
+                                                <td>{{subnota.fecha}}</td>
+                                                <td></td>
+                                                <td>{{subnota.nota}}</td>
+                                                <td>{{subnota.especialidad}}</td>
+                                                <td>{{subnota.diagnosticoPrincipal}}</td>
+                                                <td></td>
+                                                <td ></td>
+                                                <td><i class="icon-eye-open show-hide-eye icon-angle-down-color" (click)="navigateNota(row ,subnota, row.subNotasMedicas)"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" *ngIf="notasMedicas">
+                    <div class="col" *ngIf="notasMedicas && notasMedicas.content">
+                        <p-paginator #paginator [rows]="pageRequest.pageSize" [totalRecords]="notasMedicas?.totalElements"
+                            (onPageChange)="getPagerNotasMedicas($event)" [pageLinkSize]="3"
+                            [showFirstLastIcon]="false">
+                        </p-paginator>
+                    </div>
+                </div>
+                <div class="row d-flex align-items-center" *ngIf="notasMedicas">
+                    <div class="col-1 flex-end align-items-center">
+                        <label class="control-label" style="white-space: nowrap;">Página actual:</label>
+                    </div>
+                    <div class="col-1 align-items-center">
+                        <input disabled type="number" class="form-control"
+                            [(ngModel)]="notasMedicas.currentPage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

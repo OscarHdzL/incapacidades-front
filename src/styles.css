@@ -1,0 +1,901 @@
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+
+body [class^="mat-"]:not(mat-icon),
+body [class*="mat-"]:not(mat-icon) {
+  font-family: "Montserrat";
+  font-size: 16px;
+}
+
+.container {
+    min-width: 95%;
+}
+
+.header-bg{
+  height: 10rem; 
+  background-color: #13322B;
+  /* position: relative; */
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #0C231E !important;
+}
+
+.label-link {
+  color: #4578f2;
+  /* text-decoration: underline; */
+  cursor: pointer;
+}
+
+.label-blue {
+  color: #4578f2;
+}
+
+.fix-svg{
+  position:fixed;
+  bottom:0;
+  width: inherit;
+  background-color: #006455;
+  /* transform: scale(1,.5); */
+}
+
+.container-padding-top {
+  padding-top: 1rem;
+}
+
+.sroll-resumen-clinico {
+  overflow-y: scroll;
+  max-height: 60%;
+}
+
+.card-search-filters{
+  width: 100%; 
+  border-bottom-left-radius: .5rem; 
+  border-bottom-right-radius: .5rem;
+}
+
+.card-header-top-radius {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.table-radius {
+  border-radius: .5rem; 
+  border: solid 1px #cccccc;
+}
+
+.modal-header {
+  background-color: #DDDDDD;
+}
+
+th, td {
+  /* text-align: center; */
+  vertical-align: middle;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.icon-angle-down-color {
+  color: #5f8cdc; 
+  font-size: 1rem; 
+  cursor: pointer;
+}
+
+.icon-angle-down-color-white {
+  color: white; 
+  font-size: 1rem; 
+  cursor: pointer;
+  /* padding-right: 4rem; */
+}
+
+@media screen and (max-width: 1024px) {
+  .img-container-header {
+      padding: 0%;
+      max-height: 4rem;
+  }
+  
+  .col-img {
+      max-width: 5rem;
+  }
+
+  .img-container {
+      padding: 0%;
+      max-height: 2.7rem;
+  }
+
+  .h5, h5 {
+      font-size: .8rem;
+  }
+
+  .h4, h4 {
+      font-size: .7rem;
+  }
+
+  .p {
+      font-size: .7em;
+  }
+
+  .control-label{
+      font-size: .6em;
+  }
+
+  .form-control, output {
+      font-size: .6em;
+  }
+
+  .label-somatometria {
+      color: gray;
+      font-size: .6rem;
+  }
+
+  .svg-arrows * {
+      transform: scale(1,.5); 
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .fix-svg {
+    transform: scale(2,2);
+    width: inherit;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .fix-svg {
+    transform: scale(2,2);
+    width: inherit;
+  }
+}
+
+/* Inician estilos gob.mx */
+
+html {
+    font-family: 'Montserrat';    
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+body {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 1.428571429;
+    color: #404041
+}
+
+/* Formularios */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group .form-control.form-control-error {
+  border-color: #D0021B
+}
+
+.form-group .form-text.form-text-error {
+  color: #D0021B;
+  font-weight: 200;
+  font-size: small;
+}
+
+kbd kbd, label {
+    font-weight: 600;
+}
+
+/* select{
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+} */
+
+.table>tbody>tr>td, .mytable>tbody>tr>th, .mytable>tfoot>tr>td, .mytable>tfoot>tr>th, .mytable>thead>tr>td, .mytable>thead>tr>th {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+}
+
+.form-select:focus {
+  border-color: #66afe9;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+}
+
+select:focus-visible{
+  outline-color: #66afe9;
+}
+
+.form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(src/assets/images/dropdown-arrow.svg) 100% / 15% no-repeat rgb(255, 255, 255);
+  background-size: 1.5rem;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+/* @media screen and (min-width:0\0) {
+    select {
+        background: none\9;
+        padding: 5px\9;
+    }
+} */
+
+.form-control {
+    width: 100%;
+    height: 39px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-control, output {
+    font-size: 16px;
+    line-height: 1.428571429;
+    color: #555;
+    display: block;
+    font-weight: 300;
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background-color: gray;
+  /* -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5); */
+}
+
+/* Headers */
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.1;
+    color: inherit
+}
+
+.h1 .small,
+.h1 small,
+.h2 .small,
+.h2 small,
+.h3 .small,
+.h3 small,
+.h4 .small,
+.h4 small,
+.h5 .small,
+.h5 small,
+.h6 .small,
+.h6 small,
+h1 .small,
+h1 small,
+h2 .small,
+h2 small,
+h3 .small,
+h3 small,
+h4 .small,
+h4 small,
+h5 .small,
+h5 small,
+h6 .small,
+h6 small {
+    font-weight: 400;
+    line-height: 1;
+    color: #777
+}
+
+.h1,
+.h2,
+.h3,
+h1,
+h2,
+h3 {
+    margin-top: 25px;
+    margin-bottom: 12.5px
+}
+
+.h1 .small,
+.h1 small,
+.h2 .small,
+.h2 small,
+.h3 .small,
+.h3 small,
+h1 .small,
+h1 small,
+h2 .small,
+h2 small,
+h3 .small,
+h3 small {
+    font-size: 65%
+}
+
+.h4,
+.h5,
+.h6,
+h4,
+h5,
+h6 {
+    margin-top: 12.5px;
+    margin-bottom: 12.5px
+}
+
+.h4 .small,
+.h4 small,
+.h5 .small,
+.h5 small,
+.h6 .small,
+.h6 small,
+h4 .small,
+h4 small,
+h5 .small,
+h5 small,
+h6 .small,
+h6 small {
+    font-size: 75%
+}
+
+.h1,
+h1 {
+    font-size: 54px
+}
+
+.h2,
+h2 {
+    font-size: 38px
+}
+
+.h3,
+h3 {
+    font-size: 28px
+}
+
+.h4,
+h4 {
+    font-size: 24px
+}
+
+.h5,
+h5 {
+    font-size: 18px
+}
+
+.h6,
+h6 {
+    font-size: 16px
+}
+
+p {
+    margin: 0 0 12.5px
+}
+
+/* Botones */
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 300;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.428571429;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn {
+    font-size: 18px;
+    border-radius: 3px;
+    padding: 10px 25px;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+.btn, .btn-danger.active, .btn-danger:active, .btn-default.active, .btn-default:active, .btn-info.active, .btn-info:active, .btn-primary.active, .btn-primary:active, .btn-warning.active, .btn-warning:active, .btn.active, .btn:active, .dropdown-menu>.disabled>a:focus, .dropdown-menu>.disabled>a:hover, .form-control, .navbar-toggle, .open>.btn-danger.dropdown-toggle, .open>.btn-default.dropdown-toggle, .open>.btn-info.dropdown-toggle, .open>.btn-primary.dropdown-toggle, .open>.btn-warning.dropdown-toggle {
+    background-image: none;
+}
+
+.btn-primary {
+    border: 2px solid #9D2449;
+    box-shadow: 0 0 0 0 #9d2449;
+    color: #9D2449;
+    background-color: #FFF;
+    border-color: #9D2449;
+}
+
+.btn-primary.focus,.btn-primary:focus {
+    color: #FFFFFF;
+    background-color: #9D2449;
+    border-color: #9D2449;
+    border: 1px solid;
+    box-shadow: 0 0 0 0.1rem #9D2449;
+}
+
+.btn-primary.active,.btn-primary:hover,.open>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #9D2449;
+    border-color: #9D2449
+}
+
+.btn-primary.active.focus,.btn-primary.active:focus,.btn-primary.active:hover,.btn-primary:active.focus,.btn-primary:active:focus,.btn-primary:active:hover,.open>.btn-primary.dropdown-toggle.focus,.open>.btn-primary.dropdown-toggle:focus,.open>.btn-primary.dropdown-toggle:hover {
+    color: #fff;
+    background-color: #9D2449;
+    border-color: #9D2449
+}
+
+.btn-primary.disabled,.btn-primary.disabled.active,.btn-primary.disabled.focus,.btn-primary.disabled:active,.btn-primary.disabled:focus,.btn-primary.disabled:hover,.btn-primary[disabled],.btn-primary[disabled].active,.btn-primary[disabled].focus,.btn-primary[disabled]:active,.btn-primary[disabled]:focus,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary,fieldset[disabled] .btn-primary.active,fieldset[disabled] .btn-primary.focus,fieldset[disabled] .btn-primary:active,fieldset[disabled] .btn-primary:focus,fieldset[disabled] .btn-primary:hover {
+    color: #FFF;
+    background-color: #9D2449;
+    border-color: #9D2449
+}
+
+.btn-primary .badge {
+    color: #9D2449;
+    background-color: #fff
+}
+
+.btn-default {
+  color: #6F7271;
+  background-color: #fff;
+  border: 2px solid #6F7271;
+  box-shadow: 0 0 0 0 #6F7271
+  
+}
+.btn-default.focus,.btn-default:focus {
+    color: #FFF;
+    background-color: #6F7271;
+    border-color: #6F7271;
+    border: 1px solid;
+    box-shadow: 0 0 0 0.1rem #6F7271;
+}
+
+.btn-default.active,.btn-default:active,.btn-default:hover,.open>.btn-default.dropdown-toggle {
+    color: #FFF;
+    background-color: #6F7271;
+    border-color: #6F7271
+}
+
+.btn-default.active.focus,.btn-default.active:focus,.btn-default.active:hover,.btn-default:active.focus,.btn-default:active:focus,.btn-default:active:hover,.open>.btn-default.dropdown-toggle.focus,.open>.btn-default.dropdown-toggle:focus,.open>.btn-default.dropdown-toggle:hover {
+    color: #FFF;
+    background-color: #6F7271;
+    border-color: #6F7271
+}
+
+.btn-default.disabled,.btn-default.disabled.active,.btn-default.disabled.focus,.btn-default.disabled:active,.btn-default.disabled:focus,.btn-default.disabled:hover,.btn-default[disabled],.btn-default[disabled].active,.btn-default[disabled].focus,.btn-default[disabled]:active,.btn-default[disabled]:focus,.btn-default[disabled]:hover,fieldset[disabled] .btn-default,fieldset[disabled] .btn-default.active,fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:active,fieldset[disabled] .btn-default:focus,fieldset[disabled] .btn-default:hover {
+    color: #FFF;
+    background-color: #6F7271;
+    border-color: #6F7271
+}
+
+.btn-default .badge {
+    color: #fff;
+    background-color: #333
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+/* Tablas */
+
+.table-responsive {
+  overflow-x: auto;
+  min-height: .01%
+}
+
+.table thead>tr>th {
+  vertical-align: bottom;
+  border-bottom: 2px solid hsl(0, 0%, 87%);
+}
+
+@media screen and (max-width:1366px) {
+  .table{
+    font-size: 13px !important;
+  }
+  .table>tbody>tr>td{
+    max-width: 25rem !important;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .table-responsive {
+      width: 100%;
+      margin-bottom: 18.75px;
+      overflow-y: hidden;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      border: 1px solid #ddd;
+  }
+  .table-responsive>.table {
+      margin-bottom: 0
+  }
+  .table-responsive>.table>tbody>tr>td,
+  .table-responsive>.table>tbody>tr>th,
+  .table-responsive>.table>tfoot>tr>td,
+  .table-responsive>.table>tfoot>tr>th,
+  .table-responsive>.table>thead>tr>td,
+  .table-responsive>.table>thead>tr>th {
+      white-space: nowrap
+  }
+  .table-responsive>.table-bordered {
+      border: 0
+  }
+  .table-responsive>.table-bordered>tbody>tr>td:first-child,
+  .table-responsive>.table-bordered>tbody>tr>th:first-child,
+  .table-responsive>.table-bordered>tfoot>tr>td:first-child,
+  .table-responsive>.table-bordered>tfoot>tr>th:first-child,
+  .table-responsive>.table-bordered>thead>tr>td:first-child,
+  .table-responsive>.table-bordered>thead>tr>th:first-child {
+      border-left: 0
+  }
+  .table-responsive>.table-bordered>tbody>tr>td:last-child,
+  .table-responsive>.table-bordered>tbody>tr>th:last-child,
+  .table-responsive>.table-bordered>tfoot>tr>td:last-child,
+  .table-responsive>.table-bordered>tfoot>tr>th:last-child,
+  .table-responsive>.table-bordered>thead>tr>td:last-child,
+  .table-responsive>.table-bordered>thead>tr>th:last-child {
+      border-right: 0
+  }
+  .table-responsive>.table-bordered>tbody>tr:last-child>td,
+  .table-responsive>.table-bordered>tbody>tr:last-child>th,
+  .table-responsive>.table-bordered>tfoot>tr:last-child>td,
+  .table-responsive>.table-bordered>tfoot>tr:last-child>th {
+      border-bottom: 0
+  }
+}
+
+@media (max-width: 767px){
+  .form-group {
+      margin-bottom: 3rem!important;
+  }
+}
+
+/* Fuentes */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459W1hyyTh89ZNpQ.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WZhyyTh89ZNpQ.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gTD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3g3D_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gbD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gfD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gnD_vx3rCs.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  /* cyrillic-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gTD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3g3D_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gbD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gfD_vx3rCubqg.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gnD_vx3rCs.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  /*** Calendario  PRIME NG****/
+  /* boton del calendario */
+  .p-button {
+    position: relative;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #9D2449;
+    background: #e9ecef;
+    border: 1px solid #ccc;
+  }
+  .p-button:focus {
+    position: relative;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #e4e2e2;
+    background: #9D2449;
+    border: 1px solid #9D2449;    
+  }
+
+  /* text del calendario */
+  .p-inputtext {
+    color: #555;
+    background: #ffffff;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid #ccc;
+    appearance: none;
+    border-radius: 6px;
+  }
+
+  /* fondo del calendario */
+  .p-datepicker {
+    padding: 0.5rem;
+    background: #ffffff;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    box-shadow: 0 0 0 0 #6F7271
+}
+
+/* dia seleccionado del calendario */
+.p-datepicker table td > span.p-highlight {
+  color: #9D2449;
+  background: #9D2449;
+  color:white;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+}
+
+.p-datepicker table td > span {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  transition: box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+
+/* dia actual del calendario */
+.p-datepicker table td.p-datepicker-today > span {
+  background:#e4e2e2;
+  color: #495057;
+  border-color: transparent;
+}
+
+/* etiqueta mes del calendario */
+.p-datepicker-month{
+  color: black;
+  align-content: flex-start;
+  font-weight: bold;
+}
+
+/* etiqueta año del calendario */
+.p-datepicker-year{
+  color: rgb(196, 49, 49);
+  padding-left: 5px;
+  align-content: flex-start;
+  font-weight: bold;
+}
+
+/* boton anterior del calendario */
+.p-datepicker-prev,
+.p-datepicker-next{
+  color: #9D2449;
+}
+
+.p-inputtext:focus + .p-button{
+  position: relative;
+  padding: 6px 12px;
+  color: #e4e2e2;
+  background: #9D2449;
+  border: 1px solid #9D2449;
+}
+
+/* Paginador prime */
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #9D2449;
+  border-color: #EEF2FF;
+  color: white;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  background-color: transparent;
+  border: 0 none;
+  /* color: #6c757d; */
+  min-width: 2rem;
+  height: 2rem;
+  margin: 0.143rem;
+  transition: box-shadow 0.2s;
+  border-radius: 50%;
+}
+
+.p-paginator-page, .p-paginator-next, .p-paginator-last, .p-paginator-first, .p-paginator-prev, .p-paginator-current {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Acaban estilos gob.mx */
+
+.capital:first-letter {
+  text-transform: capitalize;
+}
+
+.checkbox-inline, .radio-inline {
+  position: relative;
+  display: inline-block;
+}
+
+.checkbox label, .checkbox-inline, .radio label, .radio-inline {
+  font-weight: 400;
+  padding-left: 20px;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px\9;
+}
+
+.btn, .btn-group, .btn-group-vertical, .caret, .checkbox-inline, .radio-inline, img {
+  vertical-align: middle;
+}
+
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type=checkbox], input[type=radio] {
+  margin: 4px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 4px\9;
+}
+
+.checkbox label, .checkbox-inline, .radio label, .radio-inline {
+  font-weight: 400;
+  padding-left: 20px;
+  cursor: pointer;
+  margin-bottom: 0;
+}

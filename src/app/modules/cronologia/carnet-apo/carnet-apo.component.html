@@ -1,0 +1,137 @@
+<section class="container container-padding-top">
+    <div class="card card-header-bottom-radius">
+        <div class="card-body">
+            <div class="col">
+                <div class="d-flex align-items-center flex-end">
+                    <div class="col" style="margin-left: 1rem; text-align: left !important;">
+                        <label>Unidad de atención</label><br>
+                        <h4>{{ carnet?.unidad }}</h4>
+                    </div>
+                    <!-- <div class="col-2 green-chip">
+                        <span>
+                            <img src="assets/images/icon_piso.svg" class="img-container">
+                        </span>
+                        Piso <b>{{ carnet?.numPiso }}</b>
+                    </div>
+                    <div class="col-2 green-chip">
+                        <span>
+                            <img src="assets/images/icon_cama.svg" class="img-container">
+                        </span>
+                        Cama <b>{{ carnet?.numCama }}</b>
+                    </div> -->
+                    <div class="col-1 img" style="max-width: 5rem;">
+                        <span>
+                            <img src="assets/images/somatometria_carnet.png" class="img-container">
+                        </span>
+                    </div>
+                    <div class="col-1 col-margin-sep">
+                        <label>Peso</label>
+                        <output>{{ carnet?.peso }} kg.</output>
+                    </div>
+                    <div class="col-1 col-margin-sep">
+                        <label>SC</label>
+                        <output>{{ carnet?.sc }} m²</output>
+                    </div>
+                    <div class="col-1">
+                        <label>Talla</label>
+                        <output>{{ carnet?.talla }} m.</output>
+                    </div>
+                </div>
+            </div>
+            <div class="referencia-header-bg">
+                <div class="row d-flex align-items-center justify-content-center" style="padding-top: .5rem;">
+                    <div class="row d-flex" style="padding-top: 1rem;">
+                        <div class="col-12">
+                            <div class="rounded-radiants hdr-tr">
+                                <div class="row" style="padding: 1rem;">
+                                    <div class="col col-margin-sep">
+                                        <h5>Diagnóstico</h5>
+                                        <output style="font-weight: normal !important;">{{ carnet?.diagnostico
+                                            }}</output>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Procedimiento</h5>
+                                        <output style="font-weight: normal !important;">{{ carnet?.procedimiento
+                                            }}</output>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex">
+                        <div class="col-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="center header_tabla" colspan="4">
+                                            <h5>Tratamiento</h5>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="carnet && carnet.ciclos">
+                                    <ng-container *ngFor="let row of carnet.ciclos; let i = index;">
+                                        <tr>
+                                            <td style="width: 40%;">
+                                                Ciclo {{row?.numCiclo}}
+                                            </td>
+                                            <td style="width: 10%;">
+                                                Fecha
+                                            </td>
+                                            <td style="width: 10%;">
+                                                Estatus
+                                            </td>
+                                            <td>
+                                                <div data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseme'+i"
+                                                    style="float: right;">
+                                                    <i class="icon-chevron-sign-down icon-angle-down-color"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr id="collapseme{{i}}" class="collapse out"
+                                            style="background-color: rgb(249, 249, 249);">
+                                            <td colspan="5" style="padding: 1rem;">
+                                                <div class="card card-header-bottom-radius">
+                                                    <div class="card-body">
+                                                        <div class="col">
+                                                            <ng-container *ngFor="let medicamento of row.medicamentos; let e = index;">
+                                                                <div class="row row-margin-bottom" >
+                                                                    <div class="col-margin-sep" style="width: 38.5%; padding: .5rem;">
+                                                                        {{medicamento.nombre}}
+                                                                    </div>
+                                                                    <div style="width: 10.5%;">
+                                                                        <ng-container  *ngFor="let fechas of medicamento?.fechas; let o = index;">
+                                                                            <div [ngClass]="{'row': true, 'row-margin-bottom' : ((o + 1) < medicamento?.fechas.length), 'row-margin-bottom-noborder':((o + 1) == medicamento?.fechas.length)}"
+                                                                            style="padding-top: .5rem;">
+                                                                                {{fechas.fecha}}
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                    <div style="width: 49%;">
+                                                                        <ng-container *ngFor="let fechas of medicamento?.fechas; let o = index;">
+                                                                            <div [ngClass]="{'row': true, 'row-margin-bottom' : ((o + 1) < medicamento?.fechas.length), 'row-margin-bottom-noborder':((o + 1) == medicamento?.fechas.length)}"
+                                                                                style="padding-top: .5rem;">
+                                                                                <span style="font-weight: bold !important; width: auto;">{{fechas.estatus}}</span><span style="width: .05rem;" *ngIf="fechas?.estatus != ' ' && fechas?.motivo != ' '">|</span>
+                                                                                <span style="width: .1rem;"
+                                                                                    *ngIf="fechas?.estatus == ' ' && fechas?.motivo == ' '">&nbsp;</span>
+                                                                                {{fechas.motivo}}
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 3rem;"></div>
+        </div>
+    </div>
+</section>

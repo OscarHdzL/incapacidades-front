@@ -1,0 +1,36 @@
+<ngx-spinner bdOpacity=0 bdColor="rgba(25,25,25,0.80)" size="large" color="#ffffff" type="ball-spin-fade"
+   [fullScreen]="true">
+</ngx-spinner>
+
+<!-- Generación de navbar like gob.mx con boostrap 5, perdón >.<  -->
+<div class="col-sm-12">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+      <div class="container">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <a class="navbar-brand">
+            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="128" height="48"
+               alt="Página de inicio, Gobierno de México">
+         </a>
+         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="d-flex">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a class="nav-link" href="https://www.gob.mx/tramites">Trámites</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://www.gob.mx/gobierno">Gobierno</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://www.gob.mx/busqueda"><span class="sr-only">Búsqueda &nbsp;</span><i class="icon-search"></i></a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </nav>
+</div>
+
+<section>
+   <app-modal-dialog></app-modal-dialog>
+   <router-outlet></router-outlet>
+   <!-- <span><img src="assets/images/footer.svg" class="fix-svg"></span> -->
+   <div class="col-12"><img src="assets/images/footer.svg" class="fix-svg"></div>
+</section>

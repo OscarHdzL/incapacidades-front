@@ -1,0 +1,52 @@
+<section class="container-fluid">
+    <div class="img-container">
+        <img src="assets/images/login_historial_clinico.png" alt="login-banner" width="100%"/>
+    </div>
+    <div class="form-container">
+        <form [formGroup]="form" role="form" (ngSubmit)="login()">
+            <div class="form-group container align-items-center">
+                <div class="col-12">
+                    <app-alert></app-alert>
+                </div>
+                <div class="col-12">
+                    <h1 class="text-center titulo-inicio">Inicio de sesión</h1>
+                </div>
+                <div class="col-12">
+                    <output class="text-center" style="margin-bottom: 5rem;">Captura los siguientes campos
+                        para acceder a tu cuenta</output>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="control-label form-group" for="email-01">Usuario</label>
+                        <input formControlName="matricula" class="form-control" placeholder="Capturar usuario" type="text"
+                            [ngClass]="{ 'form-control-error': formulario.matricula.touched && formulario.matricula.errors }">
+                    </div>
+                    <div *ngIf="formulario.matricula.errors && formulario.matricula.touched" class="form-group">
+                        <small *ngIf="formulario.matricula.errors.required" class="form-text form-text-error">{{
+                            mensaje.requerido }}</small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="control-label form-group" for="password-01" style="text-align: left;">Contraseña</label>
+                        <div class="input-group">
+                            <input formControlName="password" class="form-control input-group" placeholder="Capturar contraseña" [type]="hide ? 'password' : 'text'"
+                                [ngClass]="{ 'form-control-error': formulario.password.touched && formulario.password.errors }">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-eye-open show-hide-eye" (click)="hidden()"></i></span>
+                        </div>
+                    </div>
+                    <div *ngIf="formulario.password.errors && formulario.password.touched" class="form-group">
+                        <small *ngIf="formulario.password.errors.required" class="form-text form-text-error">{{
+                            mensaje.requerido }}</small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Acceder</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- <span><img src="assets/images/footer.svg" class="fix-svg"></span> -->

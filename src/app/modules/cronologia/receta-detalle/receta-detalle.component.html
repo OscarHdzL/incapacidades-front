@@ -1,0 +1,76 @@
+<section class="container container-padding-top">
+    <div class="card card-search-filters">
+        <div class="row d-flex align-items-center" style="padding-left: 1rem; padding-right: 1rem;">
+            <div class="col-3 col-margin-sep-pipe">
+                <h5>{{ detalleNotaMedica?.notaMedicaParent?.unidad }}, {{ detalleNotaMedica?.notaMedicaParent?.ooad }}
+                </h5>
+            </div>
+            <div class="col-5">
+                <h5 class="capital">{{ dateHeaderParsed }}</h5>
+            </div>
+        </div>
+        <div *ngIf="list && list.length > 0">
+            <div style="font-size: .6em;">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="receta-prm-img" src="assets/images/receta_lg.svg">
+                    </div>
+                    <div class="col-8 receta-def-img">
+                        <img src="assets/images/receta_individual_md.svg">
+                        <img src="assets/images/receta_resurtible_md.svg">
+                        <img src="assets/images/receta_transcripcion_md.svg">
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 0; margin-top: -4px; width: 100%;">
+                    <div class="col" style="border-bottom: 6px solid #64CB84;"></div>
+                </div>
+                <div class="row row-cols-3" style="border: none; margin-left: 0; width: 100%;">
+                    <div class="col" *ngFor="let row of list;" style="border-left: .5px solid #DDDDDD; border-right: .5px solid #DDDDDD;"
+                        [ngClass]="{ 'receta-bg-header': row?.medicamento != undefined, 'receta-bg-body': row?.medicamento == undefined, 'receta-color-in': row?.tipoReceta == tipoReceta.INDIVIDUAL, 'receta-color-re': row?.tipoReceta == tipoReceta.RESURTIBLE, 'receta-color-tr': row?.tipoReceta == tipoReceta.TRANSCRIPCION }">
+                        <div *ngIf="row && row.medicamento != undefined">
+                            <div class="row">
+                                <div class="col-8" style="padding-top: 7px; padding-bottom: 7px;">
+                                    <span>{{row.medicamento}}</span>
+                                </div>
+                                <div class="col-4" style="padding-top: 7px; padding-bottom: 7px;">
+                                    <div *ngIf="row.tipoReceta == tipoReceta.INDIVIDUAL" style="float: right;">
+                                        <img src="assets/images/icon_time_ind.png">&nbsp;<span style="color: black;">{{row.cada}}</span><br>
+                                        <img src="assets/images/icon_calendar_ind.png">&nbsp;<span style="color: black;">{{row.durante}}</span>
+                                    </div>
+                                    <div *ngIf="row.tipoReceta == tipoReceta.RESURTIBLE" style="float: right;">
+                                        <img src="assets/images/icon_time_res.png">&nbsp;<span style="color: black;">{{row.cada}}</span><br>
+                                        <img src="assets/images/icon_calendar_res.png">&nbsp;<span style="color: black;">{{row.durante}}</span>
+                                    </div>
+                                    <div *ngIf="row.tipoReceta == tipoReceta.TRANSCRIPCION" style="float: right;">
+                                        <img src="assets/images/icon_time_tra.png">&nbsp;<span style="color: black;">{{row.cada}}</span><br>
+                                        <img src="assets/images/icon_calendar_tra.png">&nbsp;<span style="color: black;">{{row.durante}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="row && !row.medicamento">
+                            <div class="row">
+                                <div class="col">
+                                    <div
+                                        [ngClass]="row?.tipoReceta == tipoReceta.INDIVIDUAL ? 'receta-border-top-in' : (row?.tipoReceta == tipoReceta.RESURTIBLE ? 'receta-border-top-re' : 'receta-border-top-tr') ">
+                                        <br>
+                                        <ul>
+                                            <li><span style="color: black;"><b>Vía de administración: </b>{{row.viaAdministracion}}</span>
+                                            </li><br>
+                                            <li><span style="color: black;"><b>Dosis</b>: {{row.indicaciones}}</span></li>
+                                            <li><span style="color: black;"><b>Cada</b>: {{row.cada}}&nbsp;&nbsp;<b>Durante</b>:
+                                                    {{row.durante}}</span>
+                                            </li>
+                                            <br>
+                                            <li><span style="color: black;"><b>Indicaciones adicionales: </b>{{row.indicacionesAdicionales}}</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

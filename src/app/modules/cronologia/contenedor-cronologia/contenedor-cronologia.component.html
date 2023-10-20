@@ -1,0 +1,72 @@
+<section class="header-bg">
+    <app-header></app-header>
+    <app-header-cronologia [idee]="idee" [idMenu]="idMenu" [idSubMenuNota]="idSubMenuNota" (menuSelectEvent)="menuSelectEvent($event)" [edadDetalle]="edadDetalle" (datosPacienteEvent)="datosPacienteEvent($event)"></app-header-cronologia>
+    <div [ngSwitch]="idMenu" style="padding-bottom: 5rem;"  *ngIf="datosPaciente">
+        <app-nota-medica *ngSwitchCase="idMenuConstant.notaMedica"
+            [idee]="idee"
+            (menuSelectEvent)="menuSelectEvent($event)"
+            (notaIndexEvent)="notaIndexEvent($event)"
+            (ideeFechaEvent)="ideeFechaEvent($event)"
+            (notasMedicasEvent)="notasMedicasEvent($event)"
+            (edadDetalleEvent)="edadDetalleEvent($event)"
+            (idSubMenuNotaEvent)="idSubMenuNotaEvent($event)"
+            (subNotasMedicasEvent)="subNotasMedicasEvent($event)"
+            (subNotaSeleccionadaEvent)="subNotaSeleccionadaEvent($event)"
+            ></app-nota-medica>
+        <app-receta  [idee]="idee" *ngSwitchCase="idMenuConstant.receta" (edadDetalleEvent)="edadDetalleEvent($event)"></app-receta>
+        <app-laboratorio [idee]="idee" *ngSwitchCase="idMenuConstant.laboratorio" (edadDetalleEvent)="edadDetalleEvent($event)"></app-laboratorio>
+        <app-nota-medica-detalle *ngSwitchCase="idMenuConstant.notaMedicaDetalle"
+            [idee]="idee"
+            [actualNotaIndex]="notaIndex"
+            [notasMedicas]="notasMedicas"
+            (notaIndexEvent)="notaIndexEvent($event)"
+            (menuSelectEvent)="menuSelectEvent($event)"
+            (recetaDetalleEvent)="recetaDetalleEvent($event)"
+            (ideeFechaEvent)="ideeFechaEvent($event)"
+            (edadDetalleEvent)="edadDetalleEvent($event)"></app-nota-medica-detalle>
+
+            <!-- subnotas -->
+            <app-nota-medica-detalle-hospitalizacion *ngSwitchCase="idMenuConstant.notaMedicaDetalleHospitalizacion"
+            [idee]="idee"
+            [idSubMenuNota] = "idSubMenuNota"
+            [actualNotaIndex]="notaIndex"
+            [notasMedicas]="notasMedicas"
+            [subNotasMedicas]="subNotasMedicas"
+            [subNotaSeleccionada]="subNotaSeleccionada"
+            (notaIndexEvent)="notaIndexEvent($event)"
+            (menuSelectEvent)="menuSelectEvent($event)"
+            (recetaDetalleEvent)="recetaDetalleEvent($event)"
+            (ideeFechaEvent)="ideeFechaEvent($event)"
+            (edadDetalleEvent)="edadDetalleEvent($event)"
+            
+            ></app-nota-medica-detalle-hospitalizacion>
+
+           <!--  <app-nota-medica-detalle-hospitalizacion *ngSwitchCase="idMenuConstant.notaInicialHospitalizacion"
+            [idee]="idee"
+            [idSubMenuNota] = "IdSubMenuNota"
+            [actualNotaIndex]="notaIndex"
+            [notasMedicas]="notasMedicas"
+            [subNotasMedicas]="subNotasMedicas"
+            [subNotaSeleccionada]="subNotaSeleccionada"
+            (notaIndexEvent)="notaIndexEvent($event)"
+            (menuSelectEvent)="menuSelectEvent($event)"
+            (recetaDetalleEvent)="recetaDetalleEvent($event)"
+            (ideeFechaEvent)="ideeFechaEvent($event)"
+            (edadDetalleEvent)="edadDetalleEvent($event)"
+            
+            ></app-nota-medica-detalle-hospitalizacion> -->
+            <!--  -->
+
+        <app-receta-detalle *ngSwitchCase="idMenuConstant.recetaDetalle"
+            [idee]="idee" 
+            [actualNotaIndex]="recetaDetalleIndex"
+            [detalleNotaMedica]="detalleNotaMedica"></app-receta-detalle>
+        <app-referencia [idee]="idee" [ideeFecha]="ideeFecha"  *ngSwitchCase="idMenuConstant.referencia"></app-referencia>
+        <app-contrareferencia [idee]="idee" [ideeFecha]="ideeFecha" *ngSwitchCase="idMenuConstant.contrareferencia"></app-contrareferencia>
+        <!-- <app-incapacidad [idee]="idee" [ideeFecha]="ideeFecha" *ngSwitchCase="idMenuConstant.incapacidades" (menuSelectEvent)="menuSelectEvent($event)" (edadDetalleEvent)="edadDetalleEvent($event)" (incapacidadEvent)="incapacidadEvent($event)"></app-incapacidad> -->
+        <app-incapacidad-nuevo [idee]="idee" [ideeFecha]="ideeFecha" *ngSwitchCase="idMenuConstant.incapacidades" (menuSelectEvent)="menuSelectEvent($event)" (edadDetalleEvent)="edadDetalleEvent($event)" (incapacidadEvent)="incapacidadEvent($event)"></app-incapacidad-nuevo>
+        <app-incapacidad-detalle [idee]="idee" [ideeFecha]="ideeFecha" *ngSwitchCase="idMenuConstant.incapacidadesDetalle" (edadDetalleEvent)="edadDetalleEvent($event)"></app-incapacidad-detalle>
+        <app-incapacidad-detail [incapacidad_]="incapacidad" *ngSwitchCase="idMenuConstant.incapacidadesDetail"  ></app-incapacidad-detail>
+        <app-carnet-apo [idee]="idee" [ideeFecha]="ideeFecha"  *ngSwitchCase="idMenuConstant.carnetAPOInterno"></app-carnet-apo>
+    </div>
+</section>
